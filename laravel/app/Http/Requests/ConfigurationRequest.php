@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class RecipientUpdateRequest extends FormRequest
+class ConfigurationRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,14 +23,12 @@ class RecipientUpdateRequest extends FormRequest
      */
     public function rules()
     {
-
         return [
-            'name' => 'required|max:255',
-            'thumbnail' => 'image|max:500|dimensions:max_width=300',
-            'type' => 'required|max:255',
-            'shares' => 'numeric',
-            'balance' => 'numeric',
-            'start_date' => 'date_format:Y-m-d'
+            'api_keys' => 'required|max:255',
+            'number_cpus' => 'required|numeric',
+            'electricity_cost' => 'required|numeric',
+            'fiat_currency_symbol' => 'required|max:5',
+            'crypto_currency_symbol' => 'required|max:5',
         ];
     }
 }

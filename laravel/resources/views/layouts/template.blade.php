@@ -128,11 +128,11 @@
 	                </span>
 	              </a>
 	              <ul class="treeview-menu">
-	                <li><a href=""><i class="fa fa-users"></i> Gérer les bénéficiaires</a></li>
-	                <li><a href=""><i class="fa fa-exchange"></i> Gérer les transactions</a></li>
+	                <li><a href="{{ url('/recipient') }}"><i class="fa fa-users"></i> Gérer les bénéficiaires</a></li>
+	                <li><a href="{{ url('/transaction') }}"><i class="fa fa-exchange"></i> Gérer les transactions</a></li>
 	              </ul>
 	            </li>
-	            <li><a href=""><i class="fa fa-gear"></i> <span>Configuration</span></a></li>
+	            <li><a href="{{ url('/configuration') }}"><i class="fa fa-gear"></i> <span>Configuration</span></a></li>
 	            @endguest
 	          </ul>
 	        </section>

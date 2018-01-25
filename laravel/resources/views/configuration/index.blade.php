@@ -1,7 +1,7 @@
 @extends('layouts.template')
 
 @section('page-title')
-    Cryptochart | Bienvenue
+    Cryptochart | Configuration
 @endsection
 
 @section('content')
@@ -11,10 +11,12 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
           <h1>
-            Statistiques
+            Configuration
+            <small>Donnés utiles au bon fonctionnement de cette app</small>
           </h1>
           <ol class="breadcrumb">
-            <li class="active">MAJ le 25/01/2018 à 13:45:45</li>
+            <li><a href="{{url('/')}}"><i class="fa fa-dashboard"></i> Accueil</a></li>
+            <li class="active">Configuration</li>
           </ol>
         </section>
 

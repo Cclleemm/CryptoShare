@@ -2,11 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\RecipientCreateRequest;
-use App\Http\Requests\RecipientUpdateRequest;
-
+use App\Http\Requests\RecipientRequest;
 use App\Repositories\RecipientRepository;
-
 use Illuminate\Http\Request;
 
 class RecipientController extends Controller
@@ -33,7 +30,7 @@ class RecipientController extends Controller
         return view('create');
     }
 
-    public function store(RecipientCreateRequest $request)
+    public function store(RecipientRequest $request)
     {
         $recipient = $this->recipientRepository->store($request->all());
 
@@ -54,7 +51,7 @@ class RecipientController extends Controller
         return view('edit',  compact('recipient'));
     }
 
-    public function update(RecipientUpdateRequest $request, $id)
+    public function update(RecipientRequest $request, $id)
     {
         $this->recipientRepository->update($id, $request->all());
         

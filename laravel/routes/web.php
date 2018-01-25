@@ -17,10 +17,8 @@ Route::get('/', function () {
 
 /* Routes for authentification */
 Auth::routes();
-
 Route::get('/welcome', 'HomeController@index')->name('welcome');
 
-
 /* Routes for Resources */
-
 Route::resource('recipient', 'RecipientController');
+Route::resource('configuration', 'ConfigurationController');
