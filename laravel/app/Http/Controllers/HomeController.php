@@ -23,6 +23,15 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+
+        //Get Suprnova API key
+
+        //Call Suprnova Server
+
+        //Retrieve Data
+
+        //Store variable
+
+        return view('welcome');
     }
 }
