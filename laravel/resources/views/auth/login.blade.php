@@ -1,10 +1,15 @@
-@extends('layouts.template')
+@extends('layouts.auth')
+
+@section('page-title')
+    Cryptochart | Login
+@endsection
+
 
 @section('content')
-<body class="hold-transition login-page">
+
     <div class="login-box">
       <div class="login-logo">
-        <a href="{{ url('/') }}"><b>Crypto</b>Charts</a>
+        <a href="{{ url('/') }}" class="text-white"><b>Crypto</b>Charts</a>
       </div>
       <!-- /.login-logo -->
       <div class="login-box-body">
@@ -63,5 +68,5 @@
       <!-- /.login-box-body -->
     </div>
     <!-- /.login-box -->
-</body>
+
 @endsection

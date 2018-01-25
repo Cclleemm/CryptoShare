@@ -34,8 +34,126 @@
 	</head>
 	
 
-	@yield('content')
+	<body class="hold-transition skin-black sidebar-mini">
+
+	    <div class="wrapper">
+
+	      <header class="main-header">
+
+	        <!-- Logo -->
+	        <a href="" class="logo">
+	          <!-- mini logo for sidebar mini 50x50 pixels -->
+	          <span class="logo-mini"><b>C</b>Cs</span>
+	          <!-- logo for regular state and mobile devices -->
+	          <span class="logo-lg"><b>Crypto</b>Charts</span>
+	        </a>
+
+	        <!-- Header Navbar: style can be found in header.less -->
+	        <nav class="navbar navbar-static-top">
+	          <!-- Sidebar toggle button-->
+	          <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+	            <span class="sr-only">Toggle navigation</span>
+	          </a>
+	          <!-- Navbar Right Menu -->
+	          <div class="navbar-custom-menu">
+	            <ul class="nav navbar-nav">
+	            @guest
+	                <li><a href="{{ route('login') }}">Login</a></li>
+	            @else
+	                <li class="dropdown">
+	                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
+	                        {{ Auth::user()->name }} <span class="caret"></span>
+	                    </a>
+
+	                    <ul class="dropdown-menu">
+	                        <li>
+	                            <a href="{{ route('logout') }}"
+	                                onclick="event.preventDefault();
+	                                         document.getElementById('logout-form').submit();">
+	                                Logout
+	                            </a>
+
+	                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+	                                {{ csrf_field() }}
+	                            </form>
+	                        </li>
+	                    </ul>
+	                </li>
+	            @endguest
+	            </ul>
+	          </div>
+
+	        </nav>
+	      </header>
+	      <!-- Left side column. contains the logo and sidebar -->
+	      <aside class="main-sidebar">
+	        <!-- sidebar: style can be found in sidebar.less -->
+	        <section class="sidebar">
+	          <!-- Sidebar user panel -->
+	          <div class="user-panel">
+	            <div class="pull-left image">
+	              <img src="img/verge.jpg" class="img-circle" alt="verge Image">
+	            </div>
+	            <div class="pull-left info">
+	              <p>Verge Mining Rig</p>
+	              <a href="#"><i class="fa fa-home"></i> Challes-les-eaux</a>
+	              <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+	            </div>
+	          </div>
+	          <!-- /.search form -->
+	          <!-- sidebar menu: : style can be found in sidebar.less -->
+	          <ul class="sidebar-menu" data-widget="tree">
+	            <li class="header">MENU</li>
+	            @guest
+	            <li class="active"><a href=""><i class="fa fa-dashboard"></i> <span>Statistiques</span></a></li>
+	            <li class="treeview">
+	              <a href="#">
+	                <i class="fa fa-edit"></i> <span>Comptabilité</span>
+	                <span class="pull-right-container">
+	                  <i class="fa fa-angle-left pull-right"></i>
+	                </span>
+	              </a>
+	              <ul class="treeview-menu">
+	                <li><a href=""><i class="fa fa-users"></i> Liste des bénéficiaires</a></li>
+	                <li><a href=""><i class="fa fa-exchange"></i> Historique des transactions</a></li>
+	              </ul>
+	            </li>
+	            @else
+	            <li class="active"><a href=""><i class="fa fa-dashboard"></i> <span>Statistiques</span></a></li>
+	            <li class="treeview">
+	              <a href="#">
+	                <i class="fa fa-edit"></i> <span>Comptabilité</span>
+	                <span class="pull-right-container">
+	                  <i class="fa fa-angle-left pull-right"></i>
+	                </span>
+	              </a>
+	              <ul class="treeview-menu">
+	                <li><a href=""><i class="fa fa-users"></i> Gérer les bénéficiaires</a></li>
+	                <li><a href=""><i class="fa fa-exchange"></i> Gérer les transactions</a></li>
+	              </ul>
+	            </li>
+	            <li><a href=""><i class="fa fa-gear"></i> <span>Configuration</span></a></li>
+	            @endguest
+	          </ul>
+	        </section>
+	        <!-- /.sidebar -->
+	      </aside>
+
+
+
+	      @yield('content')
 	
+
+		  <footer class="main-footer">
+			<div class="pull-right hidden-xs">
+			  <b>Version</b> 0.0.1
+			</div>
+			<strong>Copyright &copy; {{date('Y')}} SavoyCorporation.</strong> All rights
+			reserved.
+		  </footer>
+
+    	</div>
+	</body>
 
 	<!--Script -->
 	<!-- jQuery 3 -->

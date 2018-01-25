@@ -1,4 +1,9 @@
-@extends('layouts.app')
+@extends('layouts.auth')
+
+@section('page-title')
+    Cryptochart | Register
+@endsection
+
 
 @section('content')
 <div class="container">
