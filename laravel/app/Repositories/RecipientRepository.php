@@ -22,6 +22,7 @@ class RecipientRepository
 		$recipient->start_date = $inputs['start_date'];	
 		$recipient->type = $inputs['type'];
 		$recipient->balance = $inputs['balance'];
+		$recipient->wallet_address = $inputs['wallet_address'];
 
 		$recipient->save();
 	}
