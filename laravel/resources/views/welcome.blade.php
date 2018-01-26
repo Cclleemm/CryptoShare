@@ -32,7 +32,7 @@
               <!-- small box -->
               <div class="small-box bg-primary">
                 <div class="inner">
-                  <h3>VERGE - {{number_format($verge_price, 4)}} EUR</h3>
+                  <h3 style="font-size:1.8em">VERGE - {{number_format($verge_price, 4)}} EUR</h3>
                   <p><h4>
                     @if ($verge_change < 0)
                     <i class="fa fa-arrow-down text-danger"></i><strong class="text-danger">{{number_format($verge_change, 2)}} </strong> dernière 24h</h4></p>
@@ -52,7 +52,7 @@
               <!-- small box -->
               <div class="small-box bg-primary">
                 <div class="inner">
-                  <h3>{{number_format($hashrate*0.001, 2)}} <sup style="font-size: 20px">MH/s</sup></h3>
+                  <h3 style="font-size:1.8em">{{number_format($hashrate*0.001, 2)}} <sup style="font-size: 20px">MH/s</sup></h3>
 
                   <p><h4>Hashrate</h4></p>
                 </div>
@@ -66,9 +66,9 @@
               <!-- small box -->
               <div class="small-box bg-primary">
                 <div class="inner">
-                  <h3>{{number_format($balanceConfirmed+$balanceUnconfirmed, 0)}}</h3>
+                  <h3 style="font-size:1.8em">{{number_format($balanceConfirmed+$balanceUnconfirmed, 0)}} ({{number_format($verge_price*($balanceConfirmed+$balanceUnconfirmed), 1)}}EUR)</h3>
 
-                  <p><h4>Verge (XVG) minés depuis le 22/01/2018</h4></p>
+                  <p><h4>Verge (XVG) minés ce mois</h4></p>
                 </div>
                 <div class="icon">
                   <i class="fa fa-dollar"></i>
@@ -81,7 +81,7 @@
               <!-- small box -->
               <div class="small-box bg-primary">
                 <div class="inner">
-                  <h3>5</h3>
+                  <h3 style="font-size:1.8em">5</h3>
 
                   <p><h4>Bénéficiaires</h4></p>
                 </div>

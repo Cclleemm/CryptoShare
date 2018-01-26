@@ -27,7 +27,7 @@ class HomeController extends Controller
     {
 
         //Get Suprnova API key
-        $api_key = DB::table('configurations')->take(1)->get()[0];
+        $api_key = Configuration::take(1)->get()[0];
 
         //Get Hashrate
         $response = file_get_contents('https://xvg-x17.suprnova.cc/index.php?page=api&action=getuserhashrate&api_key='.$api_key->api_key);
