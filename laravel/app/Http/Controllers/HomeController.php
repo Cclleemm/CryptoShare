@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Configuration;
-use DB;
+use App\Processor\ApiProcessor;
 
 class HomeController extends Controller
 {
@@ -23,35 +23,37 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(ApiProcessor $apiprocessor)
     {
+        //Retrieve configuration
+        $configuration = Configuration::take(1)->get()[0];
 
-        //Get Suprnova API key
-        $api_key = Configuration::take(1)->get()[0];
+        $poolData = $apiprocessor->getDatafromPool($configuration->api_key);
+        $coinmarketcapData = $apiprocessor->getDatafromCoinMarketCap("verge", $configuration->fiat_currency_symbol);
 
-        //Get Hashrate
-        $response = file_get_contents('https://xvg-x17.suprnova.cc/index.php?page=api&action=getuserhashrate&api_key='.$api_key->api_key);
-        $response = json_decode($response);
-        $hashrate = $response->getuserhashrate->data;
+        if($poolData && $coinmarketcapData)
+        {
+            $hashrate = number_format($poolData['hashrate']*0.001, 2);
+            $balance = number_format($poolData['confirmed']+$poolData['unconfirmed'], 0);
+            $verge_price = number_format($coinmarketcapData['verge_price'], 4);
+            $balance_fiat = number_format(($poolData['confirmed']+$poolData['unconfirmed'])*$coinmarketcapData['verge_price'], 0);
+            $verge_change = number_format($coinmarketcapData['verge_change'], 2);
 
-        //Get Balance
-        $response = file_get_contents('https://xvg-x17.suprnova.cc/index.php?page=api&action=getuserbalance&api_key='.$api_key->api_key);
-        $response = json_decode($response);
-        $confirmed = $response->getuserbalance->data->confirmed;
-        $unconfirmed = $response->getuserbalance->data->unconfirmed;
+            $infos = array('hashrate' => $hashrate, 
+                            'balance' => $balance, 
+                            'balance_fiat' => $balance_fiat,
+                            'verge_price' => $verge_price, 
+                            'verge_change' => $verge_change, 
+                            'currency' => $configuration->fiat_currency_symbol, 
+                            'coin_symbol' => $configuration->crypto_currency_symbol
+                            );
+            
+            return view('welcome')->with($infos);            
+        }
+        else
+        {
+            return view('welcome')->with('error', 'Failed to connect to the API'); 
+        }
 
-
-
-        $response = file_get_contents('https://api.coinmarketcap.com/v1/ticker/verge/?convert=EUR');
-        $response = json_decode($response);
-        $verge_price = $response[0]->price_eur;
-        $verge_change = $response[0]->percent_change_24h;
-        //Call Suprnova Server
-
-        $infos = array('hashrate' => $hashrate, 'balanceConfirmed' => $confirmed, 'balanceUnconfirmed' => $unconfirmed, 'verge_price' => $verge_price, 'verge_change' => $verge_change, 'api_key' => $api_key);
-
-        //Store variable
-
-        return view('welcome')->with($infos);
     }
 }

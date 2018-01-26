@@ -37,10 +37,11 @@ composer create-project --prefer-dist laravel/laravel cryptoshare
 ```
 2/ Setup the MySQL database "cryptoshare"
 
-3/ You should be able to access the home page of the application as a guest here.
-Go to localhost/register to create an admin account and localhost/login to sign in and enable admin features.
+3/ You should be able to access the home page of the application as a guest here but the api key to retrieve your Suprnova data is missing.
 
-4/ Give us a like !
+4/ Go to localhost/register to create an admin account and localhost/login to sign in. Go to localhost/configuration and add the Suprnova API key, data are coming now ;)
+
+5/ Give us a like !
 
 ## Deployment
 
@@ -54,7 +55,7 @@ Follow [instructions on Laravel website](https://laravel.com/docs/5.5/deployment
 
 ## Authors
 
-* **Thomas Cosialls** - *Initial work* - [Thomas CCosialls](https://github.com/tomtomdu73)
+* **Thomas Cosialls** - *Initial work* - [Thomas Cosialls](https://github.com/tomtomdu73)
 
 See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
 
