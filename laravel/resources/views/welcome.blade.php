@@ -5,17 +5,22 @@
 @endsection
 
 @section('content')
-
-      <!-- Content Wrapper. Contains page content -->
+       <!-- Content Wrapper. Contains page content -->
       <div class="content-wrapper">
+
         <!-- Content Header (Page header) -->
         <section class="content-header">
+          @if (!$api_key)
+          <div class="callout callout-danger">
+            <h4>Clé API manquante !</h4>
+
+            <p>Veuillez <a href="{{ url('/configuration') }}">renseigner une clé API</a> correspondant à votre compte sur le pool pour le bon fonctionnement de cette plateforme.</p>
+          </div>  
+          @endif
           <h1>
             Statistiques
+            <small>MAJ le 25/01/2018 à 13:45:45</small>
           </h1>
-          <ol class="breadcrumb">
-            <li class="active">MAJ le 25/01/2018 à 13:45:45</li>
-          </ol>
         </section>
 
         <!-- Main content -->
@@ -27,8 +32,14 @@
               <!-- small box -->
               <div class="small-box bg-primary">
                 <div class="inner">
-                  <h3>VERGE - 0.009$</h3>
-                  <p><h4><i class="fa fa-arrow-up text-success"></i><strong class="text-success">11% </strong> dernière 24h</h4></p>
+                  <h3>VERGE - {{number_format($verge_price, 4)}} EUR</h3>
+                  <p><h4>
+                    @if ($verge_change < 0)
+                    <i class="fa fa-arrow-down text-danger"></i><strong class="text-danger">{{number_format($verge_change, 2)}} </strong> dernière 24h</h4></p>
+                    @else
+                    <i class="fa fa-arrow-up text-success"></i><strong class="text-success">{{number_format($verge_change, 2)}} </strong> dernière 24h</h4></p>
+                    @endif
+
                 </div>
                 <div class="icon">
                   XVG
@@ -41,7 +52,7 @@
               <!-- small box -->
               <div class="small-box bg-primary">
                 <div class="inner">
-                  <h3>46.8 <sup style="font-size: 20px">MH/s</sup></h3>
+                  <h3>{{number_format($hashrate*0.001, 2)}} <sup style="font-size: 20px">MH/s</sup></h3>
 
                   <p><h4>Hashrate</h4></p>
                 </div>
@@ -55,7 +66,7 @@
               <!-- small box -->
               <div class="small-box bg-primary">
                 <div class="inner">
-                  <h3>1200 (~ 120$)</h3>
+                  <h3>{{number_format($balanceConfirmed+$balanceUnconfirmed, 0)}}</h3>
 
                   <p><h4>Verge (XVG) minés depuis le 22/01/2018</h4></p>
                 </div>

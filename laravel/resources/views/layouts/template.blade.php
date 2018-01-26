@@ -105,7 +105,7 @@
 	          <ul class="sidebar-menu" data-widget="tree">
 	            <li class="header">MENU</li>
 	            @guest
-	            <li class="active"><a href=""><i class="fa fa-dashboard"></i> <span>Statistiques</span></a></li>
+	            <li class="{{ Route::currentRouteNamed('home') ? 'active' : '' }}"><a href="{{url('/')}}"><i class="fa fa-dashboard"></i> <span>Statistiques</span></a></li>
 	            <li class="treeview">
 	              <a href="#">
 	                <i class="fa fa-edit"></i> <span>Comptabilité</span>
@@ -114,12 +114,12 @@
 	                </span>
 	              </a>
 	              <ul class="treeview-menu">
-	                <li><a href=""><i class="fa fa-users"></i> Liste des bénéficiaires</a></li>
-	                <li><a href=""><i class="fa fa-exchange"></i> Historique des transactions</a></li>
+	                <li class="{{ Route::currentRouteNamed('recipient.index') ? 'active' : '' }}"><a href=""><i class="fa fa-users"></i> Liste des bénéficiaires</a></li>
+	                <li class="{{ Route::currentRouteNamed('transaction.index') ? 'active' : '' }}"><a href=""><i class="fa fa-exchange"></i> Historique des transactions</a></li>
 	              </ul>
 	            </li>
 	            @else
-	            <li class="active"><a href=""><i class="fa fa-dashboard"></i> <span>Statistiques</span></a></li>
+	            <li class="{{ Route::currentRouteNamed('home') ? 'active' : '' }}"><a href="{{url('/')}}"><i class="fa fa-dashboard"></i> <span>Statistiques</span></a></li>
 	            <li class="treeview">
 	              <a href="#">
 	                <i class="fa fa-edit"></i> <span>Comptabilité</span>
@@ -128,11 +128,11 @@
 	                </span>
 	              </a>
 	              <ul class="treeview-menu">
-	                <li><a href="{{ url('/recipient') }}"><i class="fa fa-users"></i> Gérer les bénéficiaires</a></li>
-	                <li><a href="{{ url('/transaction') }}"><i class="fa fa-exchange"></i> Gérer les transactions</a></li>
+	                <li class="{{ Route::currentRouteNamed('recipient.index') ? 'active' : '' }}"><a href="{{ url('/recipient') }}"><i class="fa fa-users"></i> Gérer les bénéficiaires</a></li>
+	                <li class="{{ Route::currentRouteNamed('transaction.index') ? 'active' : '' }}"><a href="{{ url('/transaction') }}"><i class="fa fa-exchange"></i> Gérer les transactions</a></li>
 	              </ul>
 	            </li>
-	            <li><a href="{{ url('/configuration') }}"><i class="fa fa-gear"></i> <span>Configuration</span></a></li>
+	            <li class="{{ Route::currentRouteNamed('configuration.index') ? 'active' : '' }}"><a href="{{ url('/configuration') }}"><i class="fa fa-gear"></i> <span>Configuration</span></a></li>
 	            @endguest
 	          </ul>
 	        </section>

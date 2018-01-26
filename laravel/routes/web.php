@@ -11,14 +11,15 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 /* Routes for authentification */
 Auth::routes();
-Route::get('/welcome', 'HomeController@index')->name('welcome');
+Route::get('/', 'HomeController@index')->name('home');
 
-/* Routes for Resources */
-Route::resource('recipient', 'RecipientController');
-Route::resource('configuration', 'ConfigurationController');
+
+//Routes when logged in
+Route::group(['middleware' => 'auth'], function()
+{
+	/* Routes for Resources */
+	Route::resource('recipient', 'RecipientController');
+	Route::resource('configuration', 'ConfigurationController');
+});

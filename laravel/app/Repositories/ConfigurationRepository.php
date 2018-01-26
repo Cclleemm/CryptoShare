@@ -16,13 +16,11 @@ class ConfigurationRepository
 
 	private function save(Configuration $configuration, Array $inputs)
 	{
-		$configuration->name = $inputs['name'];
-		$configuration->thumbnail = $inputs['thumbnail'];
-		$configuration->shares = $inputs['shares'];
-		$configuration->start_date = $inputs['start_date'];	
-		$configuration->type = $inputs['type'];
-		$configuration->balance = $inputs['balance'];
-		$configuration->wallet_address = $inputs['wallet_address'];
+		$configuration->api_key = $inputs['api_key'];
+		$configuration->number_cpus = $inputs['number_cpus'];
+		$configuration->electricity_cost = $inputs['electricity_cost'];
+		$configuration->fiat_currency_symbol = $inputs['fiat_currency_symbol'];	
+		$configuration->crypto_currency_symbol = $inputs['crypto_currency_symbol'];
 
 		$configuration->save();
 	}

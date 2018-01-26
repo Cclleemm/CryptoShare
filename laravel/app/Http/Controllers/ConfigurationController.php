@@ -19,9 +19,9 @@ class ConfigurationController extends Controller
 
     public function index()
     {
-        $configuration = Configuration::find(1);;
+        $configurations = Configuration::all();
 
-        return view('configuration.index', compact('configuration'));
+        return view('configuration.index', compact('configurations'));
     }
 
     public function create()
@@ -31,14 +31,14 @@ class ConfigurationController extends Controller
 
     public function store(ConfigurationRequest $request)
     {
-        if(Configuration::all()->count() < 1)
+        if(Configuration::all()->count() == 0)
         {
             $configuration = $this->configurationRepository->store($request->all());
             return redirect('configuration')->withOk("La configuration a été créé avec succés !");
         }
         else
         {
-            return redirect('configuration')->with('status', 'Une seule configuration possible!');
+            return redirect('configuration')->withOk('Une configuration existe déja!');
         }
 
     }
@@ -61,7 +61,7 @@ class ConfigurationController extends Controller
     {
         $this->configurationRepository->update($id, $request->all());
         
-        return redirect('configuration')->withOk("La configuration a été modifié.");
+        return redirect('configuration')->withOk("La configuration a été modifié avec succés!");
     }
 
     public function destroy($id)

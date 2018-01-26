@@ -24,7 +24,7 @@ class ConfigurationRequest extends FormRequest
     public function rules()
     {
         return [
-            'api_keys' => 'required|max:255',
+            'api_key' => 'required|max:255',
             'number_cpus' => 'required|numeric',
             'electricity_cost' => 'required|numeric',
             'fiat_currency_symbol' => 'required|max:5',
