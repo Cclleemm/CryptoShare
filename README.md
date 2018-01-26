@@ -48,11 +48,9 @@ Follow [instructions on Laravel website](https://laravel.com/docs/5.5/deployment
 
 ## Built With
 
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
-* [Maven](https://maven.apache.org/) - Dependency Management
-* [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
-
-## Contributing
+* [Laravel](http://www.dropwizard.io/1.0.2/docs/) - The web framework for php artisan
+* [AdminLTE](https://maven.apache.org/) - https://adminlte.io/
+* [Decorative Backgrounds](https://tympanus.net/codrops/?p=33168) three.js background animations
 
 ## Authors
 
