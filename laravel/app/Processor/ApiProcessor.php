@@ -38,18 +38,31 @@ class ApiProcessor
         
         if($response)
         {
-	        $response = json_decode($response);
-
+        	$response = json_decode($response);
 	        switch($currency){
-	        	case 'EUR' : $verge_price = $response[0]->price_eur;
+	        	case 'EUR' : $coin_price = $response[0]->price_eur;
 	        	break;
 
-	        	case 'USD' : $verge_price = $response[0]->price_usd;
+	        	case 'USD' : $coin_price = $response[0]->price_usd;
 	        	break;
 	        }
-	        $verge_change = $response[0]->percent_change_24h;	
+	        $coin_change = $response[0]->percent_change_24h;	
 
-	        return array('verge_price' => $verge_price, 'verge_change' => $verge_change);	
+	        return array('coin_price' => $coin_price, 'coin_change' => $coin_change);	
+		}
+		else
+		{
+			return false;
+		}
+	}
+
+	public function getAllCoinsfromCoinMarketCap()
+	{
+		$response = @file_get_contents(ApiProcessor::COINMARKETCAPURL.'v1/ticker/?limit=1000');
+
+        if($response)
+        {
+	        return json_decode($response);	
 		}
 		else
 		{

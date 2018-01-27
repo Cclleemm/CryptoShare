@@ -29,21 +29,21 @@ class HomeController extends Controller
         $configuration = Configuration::take(1)->get()[0];
 
         $poolData = $apiprocessor->getDatafromPool($configuration->api_key);
-        $coinmarketcapData = $apiprocessor->getDatafromCoinMarketCap("verge", $configuration->fiat_currency_symbol);
+        $coinmarketcapData = $apiprocessor->getDatafromCoinMarketCap($configuration->crypto_currency_name, $configuration->fiat_currency_symbol);
 
         if($poolData && $coinmarketcapData)
         {
             $hashrate = number_format($poolData['hashrate']*0.001, 2);
             $balance = number_format($poolData['confirmed']+$poolData['unconfirmed'], 0);
-            $verge_price = number_format($coinmarketcapData['verge_price'], 4);
-            $balance_fiat = number_format(($poolData['confirmed']+$poolData['unconfirmed'])*$coinmarketcapData['verge_price'], 0);
-            $verge_change = number_format($coinmarketcapData['verge_change'], 2);
+            $coin_price = number_format($coinmarketcapData['coin_price'], 3);
+            $balance_fiat = number_format(($poolData['confirmed']+$poolData['unconfirmed'])*$coinmarketcapData['coin_price'], 0);
+            $coin_change = number_format($coinmarketcapData['coin_change'], 2);
 
             $infos = array('hashrate' => $hashrate, 
                             'balance' => $balance, 
                             'balance_fiat' => $balance_fiat,
-                            'verge_price' => $verge_price, 
-                            'verge_change' => $verge_change, 
+                            'coin_price' => $coin_price, 
+                            'coin_change' => $coin_change, 
                             'currency' => $configuration->fiat_currency_symbol, 
                             'coin_symbol' => $configuration->crypto_currency_symbol
                             );

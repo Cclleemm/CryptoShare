@@ -7,6 +7,7 @@ use App\Repositories\ConfigurationRepository;
 use Illuminate\Http\Request;
 
 use App\Configuration;
+use App\Processor\ApiProcessor;
 
 class ConfigurationController extends Controller
 {
@@ -17,11 +18,15 @@ class ConfigurationController extends Controller
         $this->configurationRepository = $configurationRepository;
     }
 
-    public function index()
+    public function index(ApiProcessor $apiprocessor)
     {
+        //Get configuration from DB
         $configurations = Configuration::all();
 
-        return view('configuration.index', compact('configurations'));
+        //Get list of 1000 coins from coinmarketcap.com
+        $allCoins = $apiprocessor->getAllCoinsfromCoinMarketCap();
+
+        return view('configuration.index', compact('configurations', 'allCoins'));
     }
 
     public function create()
@@ -33,7 +38,15 @@ class ConfigurationController extends Controller
     {
         if(Configuration::all()->count() == 0)
         {
-            $configuration = $this->configurationRepository->store($request->all());
+            $inputs['api_key'] = $request->api_key;
+            $inputs['number_cpus'] = $request->number_cpus;
+            $inputs['electricity_cost'] = $request->electricity_cost;
+            $inputs['fiat_currency_symbol'] = $request->fiat_currency_symbol; 
+            $inputs['crypto_currency_symbol'] = $request->crypto_currency_symbol[0]['coin_symbol'];
+            $inputs['crypto_currency_name'] = $request->crypto_currency_symbol[0]['coin_name'];
+
+            $configuration = $this->configurationRepository->store($inputs);
+
             return redirect('configuration')->withOk("La configuration a été créé avec succés !");
         }
         else
@@ -59,7 +72,17 @@ class ConfigurationController extends Controller
 
     public function update(ConfigurationRequest $request, $id)
     {
-        $this->configurationRepository->update($id, $request->all());
+
+        $inputs['api_key'] = $request->api_key;
+        $inputs['number_cpus'] = $request->number_cpus;
+        $inputs['electricity_cost'] = $request->electricity_cost;
+        $inputs['fiat_currency_symbol'] = $request->fiat_currency_symbol; 
+
+        $coin_info = explode('|', $request->crypto_currency_symbol);
+        $inputs['crypto_currency_symbol'] = $coin_info[0];
+        $inputs['crypto_currency_name'] = $coin_info[1]; 
+
+        $this->configurationRepository->update($id, $inputs);
         
         return redirect('configuration')->withOk("La configuration a été modifié avec succés!");
     }

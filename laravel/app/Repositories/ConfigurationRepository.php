@@ -21,6 +21,7 @@ class ConfigurationRepository
 		$configuration->electricity_cost = $inputs['electricity_cost'];
 		$configuration->fiat_currency_symbol = $inputs['fiat_currency_symbol'];	
 		$configuration->crypto_currency_symbol = $inputs['crypto_currency_symbol'];
+		$configuration->crypto_currency_name = $inputs['crypto_currency_name'];
 
 		$configuration->save();
 	}

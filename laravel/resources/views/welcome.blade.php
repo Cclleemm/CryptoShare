@@ -32,12 +32,12 @@
               <!-- small box -->
               <div class="small-box bg-primary">
                 <div class="inner">
-                  <h3 style="font-size:1.8em">{{$coin_symbol}} - {{$verge_price}} {{$currency}} </h3>
+                  <h3 style="font-size:1.8em">{{$coin_symbol}} - {{$coin_price}} {{$currency}} </h3>
                   <p><h4>
-                    @if ($verge_change < 0)
-                    <i class="fa fa-arrow-down text-danger"></i><strong class="text-danger">{{$verge_change}} </strong> dernière 24h</h4></p>
+                    @if ($coin_change < 0)
+                    <i class="fa fa-arrow-down text-danger"></i><strong class="text-danger">{{$coin_change}} </strong> dernière 24h</h4></p>
                     @else
-                    <i class="fa fa-arrow-up text-success"></i><strong class="text-success">{{$verge_change}} </strong> dernière 24h</h4></p>
+                    <i class="fa fa-arrow-up text-success"></i><strong class="text-success">{{$coin_change}} </strong> dernière 24h</h4></p>
                     @endif
 
                 </div>

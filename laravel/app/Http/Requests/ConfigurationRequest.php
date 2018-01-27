@@ -28,7 +28,7 @@ class ConfigurationRequest extends FormRequest
             'number_cpus' => 'required|numeric',
             'electricity_cost' => 'required|numeric',
             'fiat_currency_symbol' => 'required|max:5',
-            'crypto_currency_symbol' => 'required|max:5',
+            'crypto_currency_symbol' => 'required|max:60',
         ];
     }
 }
