@@ -63,28 +63,21 @@
                 </div>
                 <div class="box-body">
 
-                  <div class="col-sm-6">
+                  <div class="col-sm-4">
                     <div class="form-group {!! $errors->has('number_cpus') ? 'has-error' : '' !!}">
                       <label for="number_cpus">Nombre de GPUs</label>
                       {!! Form::number('number_cpus', null, ['class' => 'form-control input-lg', 'placeholder' => '1, 2, 3 ... ?']) !!}
                       {!! $errors->first('number_cpus', '<small class="help-block">:message</small>') !!}
                     </div>
                   </div>
-                  <div class="col-sm-6">
-                    <div class="form-group {!! $errors->has('crypto_currency_symbol') ? 'has-error' : '' !!}">
-                      <label for="crypto_currency_symbol">Monnaie minée</label>
-                      {!! Form::text('crypto_currency_symbol', null, ['class' => 'form-control input-lg', 'placeholder' => 'BTC, ETH, XMR...', 'maxlenght' => '5']) !!}
-                      {!! $errors->first('crypto_currency_symbol', '<small class="help-block">:message</small>') !!}
-                    </div>
-                  </div>
-                  <div class="col-sm-6">
-                    <div class="form-group {!! $errors->has('fiat_currency_symbol') ? 'has-error' : '' !!}">
+                  <div class="col-sm-4">
+                    <div class="form-group {!! $errors->has('fiat_currency_symbol') ? 'has-error' : '' !!}" style="display:block">
                       <label for="fiat_currency_symbol">Devise d'affichage (FIAT)</label>
-                      {!! Form::text('fiat_currency_symbol', null, ['class' => 'form-control input-lg', 'placeholder' => 'USD, EUR...', 'maxlenght' => '5']) !!}
+                      {!! Form::select('fiat_currency_symbol', array('EUR' => 'Euro', 'USD' => 'US Dollar'), 'EUR', ['class' => 'form-control input-lg']) !!}    
                       {!! $errors->first('fiat_currency_symbol', '<small class="help-block">:message</small>') !!}
                     </div>
                   </div>
-                  <div class="col-sm-6">
+                  <div class="col-sm-4">
                     <div class="form-group {!! $errors->has('electricity_cost') ? 'has-error' : '' !!}">
                       <label for="electricity_cost">Coût électrique / mois</label>
                       <div class="input-group">
@@ -94,7 +87,13 @@
                       {!! $errors->first('electricity_cost', '<small class="help-block">:message</small>') !!}
                     </div>
                   </div>
-
+                  <div class="col-sm-12">
+                    <div class="form-group {!! $errors->has('crypto_currency_symbol') ? 'has-error' : '' !!}">
+                      <label for="crypto_currency_symbol">Monnaie minée</label>
+                      {!! Form::select('crypto_currency_symbol', array('BTC' => 'Bitcoin', 'XVG' => 'Verge'), 'BTC', ['class' => 'form-control select2']) !!}
+                      {!! $errors->first('crypto_currency_symbol', '<small class="help-block">:message</small>') !!}
+                    </div>
+                  </div>
                 </div>
                 <!-- /.box-body -->
               </div>
@@ -111,5 +110,18 @@
         <!-- /.content -->
       </div>
       <!-- /.content-wrapper -->
+
+@endsection
+
+@section('extra-script')
+
+  {{ Html::script('bower_components/select2/dist/js/select2.full.min.js') }}
+
+  <script>
+    $(function () {
+      //Initialize Select2 Elements
+      $('.select2').select2()
+    });
+  </script>
 
 @endsection

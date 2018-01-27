@@ -26,6 +26,7 @@
   		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 
 		<link href="{{ asset('dist/css/AdminLTE.min.css') }}" rel='stylesheet' type='text/css' />
+		<link href="{{ asset('bower_components/select2/dist/css/select2.min.css') }}" rel='stylesheet' type='text/css' />
 		
 		<!--[if lte IE 8]><script src="js/admin/ie/html5shiv.js"></script><![endif]-->
 		<!--[if lte IE 8]><link href="css/admin/ie8.css" rel='stylesheet' type='text/css' /><![endif]-->
@@ -155,6 +156,8 @@
     	</div>
 	</body>
 
+
+
 	<!--Script -->
 	<!-- jQuery 3 -->
 	{{ Html::script('bower_components/jquery/dist/jquery.min.js') }}
@@ -179,5 +182,7 @@
 	{{ Html::script('dist/js/demo.js') }}
 	
 	<!--[if lte IE 8]>{{ Html::script('js/admin/ie/respond.min.js') }}<![endif]-->
+
+	@yield('extra-script')
 
 </html>

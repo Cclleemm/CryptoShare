@@ -39,7 +39,14 @@ class ApiProcessor
         if($response)
         {
 	        $response = json_decode($response);
-	        $verge_price = $response[0]->price_eur;
+
+	        switch($currency){
+	        	case 'EUR' : $verge_price = $response[0]->price_eur;
+	        	break;
+
+	        	case 'USD' : $verge_price = $response[0]->price_usd;
+	        	break;
+	        }
 	        $verge_change = $response[0]->percent_change_24h;	
 
 	        return array('verge_price' => $verge_price, 'verge_change' => $verge_change);	
