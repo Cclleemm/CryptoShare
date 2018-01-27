@@ -42,8 +42,10 @@ class ConfigurationController extends Controller
             $inputs['number_cpus'] = $request->number_cpus;
             $inputs['electricity_cost'] = $request->electricity_cost;
             $inputs['fiat_currency_symbol'] = $request->fiat_currency_symbol; 
-            $inputs['crypto_currency_symbol'] = $request->crypto_currency_symbol[0]['coin_symbol'];
-            $inputs['crypto_currency_name'] = $request->crypto_currency_symbol[0]['coin_name'];
+            
+            $coin_info = explode('|', $request->crypto_currency_symbol);
+            $inputs['crypto_currency_symbol'] = $coin_info[0];
+            $inputs['crypto_currency_name'] = $coin_info[1]; 
 
             $configuration = $this->configurationRepository->store($inputs);
 

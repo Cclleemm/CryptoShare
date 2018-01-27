@@ -26,34 +26,43 @@ class HomeController extends Controller
     public function index(ApiProcessor $apiprocessor)
     {
         //Retrieve configuration
-        $configuration = Configuration::take(1)->get()[0];
+        $configuration = Configuration::take(1)->get();
 
-        $poolData = $apiprocessor->getDatafromPool($configuration->api_key);
-        $coinmarketcapData = $apiprocessor->getDatafromCoinMarketCap($configuration->crypto_currency_name, $configuration->fiat_currency_symbol);
-
-        if($poolData && $coinmarketcapData)
+        if($configuration->count() > 0)
         {
-            $hashrate = number_format($poolData['hashrate']*0.001, 2);
-            $balance = number_format($poolData['confirmed']+$poolData['unconfirmed'], 0);
-            $coin_price = number_format($coinmarketcapData['coin_price'], 3);
-            $balance_fiat = number_format(($poolData['confirmed']+$poolData['unconfirmed'])*$coinmarketcapData['coin_price'], 0);
-            $coin_change = number_format($coinmarketcapData['coin_change'], 2);
+            $configuration = $configuration[0];
 
-            $infos = array('hashrate' => $hashrate, 
-                            'balance' => $balance, 
-                            'balance_fiat' => $balance_fiat,
-                            'coin_price' => $coin_price, 
-                            'coin_change' => $coin_change, 
-                            'currency' => $configuration->fiat_currency_symbol, 
-                            'coin_symbol' => $configuration->crypto_currency_symbol
-                            );
-            
-            return view('welcome')->with($infos);            
+            $poolData = $apiprocessor->getDatafromPool($configuration->api_key);
+            $coinmarketcapData = $apiprocessor->getDatafromCoinMarketCap($configuration->crypto_currency_name, $configuration->fiat_currency_symbol);
+
+            if($poolData && $coinmarketcapData)
+            {
+                $hashrate = number_format($poolData['hashrate']*0.001, 2);
+                $balance = number_format($poolData['confirmed']+$poolData['unconfirmed'], 0);
+                $coin_price = number_format($coinmarketcapData['coin_price'], 3);
+                $balance_fiat = number_format(($poolData['confirmed']+$poolData['unconfirmed'])*$coinmarketcapData['coin_price'], 0);
+                $coin_change = number_format($coinmarketcapData['coin_change'], 2);
+
+                $infos = array('hashrate' => $hashrate, 
+                                'balance' => $balance, 
+                                'balance_fiat' => $balance_fiat,
+                                'coin_price' => $coin_price, 
+                                'coin_change' => $coin_change, 
+                                'currency' => $configuration->fiat_currency_symbol, 
+                                'coin_symbol' => $configuration->crypto_currency_symbol
+                                );
+                
+                return view('welcome')->with($infos);            
+            }
+            else
+            {
+                return view('welcome')->with('error', 'Failed to connect to the API'); 
+            }            
         }
         else
         {
-            return view('welcome')->with('error', 'Failed to connect to the API'); 
-        }
+            return view('welcome')->with('error', 'Failed to connect to the API, no configuration'); 
+        }   
 
     }
 }

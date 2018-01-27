@@ -48,7 +48,7 @@
                 <div class="box-header with-border">
                   <h3 class="box-title">Clé API du pool</h3>
                 </div>
-                <div class="box-body">
+                <div class="box-body">conficon
                   <div class="form-group {!! $errors->has('api_key') ? 'has-error' : '' !!}">
                     {!! Form::text('api_key', null, ['class' => 'form-control input-lg', 'placeholder' => 'Copier la clé ici']) !!}
                     {!! $errors->first('api_key', '<small class="help-block">:message</small>') !!}
@@ -73,7 +73,7 @@
                   <div class="col-sm-4">
                     <div class="form-group {!! $errors->has('fiat_currency_symbol') ? 'has-error' : '' !!}" style="display:block">
                       <label for="fiat_currency_symbol">Devise d'affichage (FIAT)</label>
-                      {!! Form::select('fiat_currency_symbol', array('EUR' => 'Euro', 'USD' => 'US Dollar'), $configuration->fiat_currency_symbol, ['class' => 'form-control input-lg']) !!}    
+                      {!! Form::select('fiat_currency_symbol', array('EUR' => 'Euro', 'USD' => 'US Dollar'), isset($configuration) ? $configuration->fiat_currency_symbol : 'USD', ['class' => 'form-control input-lg']) !!}    
                       {!! $errors->first('fiat_currency_symbol', '<small class="help-block">:message</small>') !!}
                     </div>
                   </div>
@@ -82,7 +82,7 @@
                       <label for="electricity_cost">Coût électrique / mois</label>
                       <div class="input-group">
                         {!! Form::number('electricity_cost', null, ['class' => 'form-control input-lg', 'placeholder' => '']) !!}
-                        <span class="input-group-addon">{{$configuration->fiat_currency_symbol}} / mois</span>
+                        <span class="input-group-addon">{{isset($configuration) ? $configuration->fiat_currency_symbol : 'USD'}} / mois</span>
                       </div>
                       {!! $errors->first('electricity_cost', '<small class="help-block">:message</small>') !!}
                     </div>
@@ -92,7 +92,7 @@
                       <label for="crypto_currency_symbol">Monnaie minée</label>
                       <select name="crypto_currency_symbol" class="form-control select2" style="width: 100%;">
                         @foreach($allCoins as $coin)
-                          @if($coin->symbol==$configuration->crypto_currency_symbol)
+                          @if(isset($configuration) && $coin->symbol==$configuration->crypto_currency_symbol)
                             <option value="{{$coin->symbol}}|{{$coin->id}}" selected>{{ $coin->name}}</option>
                           @else
                             <option value="{{$coin->symbol}}|{{$coin->id}}">{{ $coin->name}}</option>
