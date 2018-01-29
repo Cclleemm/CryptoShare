@@ -15,11 +15,12 @@
 Auth::routes();
 Route::get('/', 'HomeController@index')->name('home');
 
-
 //Routes when logged in
 Route::group(['middleware' => 'auth'], function()
 {
 	/* Routes for Resources */
-	Route::resource('recipient', 'RecipientController');
+	Route::get('recipient', 'RecipientController@index');
 	Route::resource('configuration', 'ConfigurationController');
+
+	Route::get('update', 'UpdateController@index');
 });

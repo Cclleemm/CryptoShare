@@ -22,7 +22,7 @@ class RecipientController extends Controller
         $recipients = $this->recipientRepository->getPaginate($this->nbrPerPage);
         $links = $recipients->render();
 
-        return view('index', compact('recipients', 'links'));
+        return view('recipient.index', compact('recipients', 'links'));
     }
 
     public function create()
