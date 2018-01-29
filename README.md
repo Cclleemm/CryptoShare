@@ -37,11 +37,13 @@ composer create-project --prefer-dist laravel/laravel cryptoshare
 ```
 2/ Setup the MySQL database "cryptoshare"
 
-3/ You should be able to access the home page of the application as a guest here but the api key to retrieve your Suprnova data is missing.
+3/ Populate CryptoShare database with `php artisan migrate`
 
-4/ Go to localhost/register to create an admin account and localhost/login to sign in. Go to localhost/configuration and add the Suprnova API key, data are coming now ;)
+4/ You should be able to access the home page of the application as a guest here but the api key to retrieve your Suprnova data is missing.
 
-5/ Give us a like !
+5/ Go to localhost/register to create an admin account and localhost/login to sign in. Go to localhost/configuration and add the Suprnova API key, data are coming now ;)
+
+6/ Give us a like !
 
 ## Deployment
 
