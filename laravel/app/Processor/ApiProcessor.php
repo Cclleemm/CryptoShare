@@ -6,11 +6,17 @@ class ApiProcessor
 {
 	public const POOLURL = "https://xvg-x17.suprnova.cc/";
 	public const COINMARKETCAPURL = "https://api.coinmarketcap.com/";
+	public const SSL_BYPASS = array(
+    					"ssl"=>array(
+        					"verify_peer"=>false,
+        					"verify_peer_name"=>false,
+    					),
+				); 
 
     public function getDatafromPool($api_key)
 	{
 		//Get Hashrate
-        $response = @file_get_contents(ApiProcessor::POOLURL.'index.php?page=api&action=getuserhashrate&api_key='.$api_key);
+        $response = @file_get_contents(ApiProcessor::POOLURL.'index.php?page=api&action=getuserhashrate&api_key='.$api_key, false, stream_context_create(ApiProcessor::SSL_BYPASS));
 
         if($response)
         {
@@ -18,7 +24,7 @@ class ApiProcessor
 	        $hashrate = $response->getuserhashrate->data;
 
 	        //Get Balance
-	        $response = @file_get_contents(ApiProcessor::POOLURL.'index.php?page=api&action=getuserbalance&api_key='.$api_key);
+	        $response = @file_get_contents(ApiProcessor::POOLURL.'index.php?page=api&action=getuserbalance&api_key='.$api_key, false, stream_context_create(ApiProcessor::SSL_BYPASS));
 	        $response = json_decode($response);
 	        $confirmed = $response->getuserbalance->data->confirmed;
 	        $unconfirmed = $response->getuserbalance->data->unconfirmed;
@@ -34,7 +40,7 @@ class ApiProcessor
 
 	public function getDatafromCoinMarketCap($coin_name, $currency)
 	{
-	    $response = @file_get_contents(ApiProcessor::COINMARKETCAPURL.'v1/ticker/'.$coin_name.'/?convert='.$currency);
+	    $response = @file_get_contents(ApiProcessor::COINMARKETCAPURL.'v1/ticker/'.$coin_name.'/?convert='.$currency, false, stream_context_create(ApiProcessor::SSL_BYPASS));
         
         if($response)
         {
@@ -58,7 +64,7 @@ class ApiProcessor
 
 	public function getAllCoinsfromCoinMarketCap()
 	{
-		$response = @file_get_contents(ApiProcessor::COINMARKETCAPURL.'v1/ticker/?limit=1000');
+		$response = @file_get_contents(ApiProcessor::COINMARKETCAPURL.'v1/ticker/?limit=1000', false, stream_context_create(ApiProcessor::SSL_BYPASS));
 
         if($response)
         {
