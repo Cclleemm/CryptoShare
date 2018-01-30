@@ -6,7 +6,6 @@ use App\Recipient;
 
 class RecipientRepository
 {
-
     protected $recipient;
 
     public function __construct(Recipient $recipient)
@@ -17,12 +16,13 @@ class RecipientRepository
 	private function save(Recipient $recipient, Array $inputs)
 	{
 		$recipient->name = $inputs['name'];
-		$recipient->thumbnail = $inputs['thumbnail'];
+		$recipient->thumbnail = isset($inputs['thumbnail']) ? $inputs['thumbnail'] : '';
 		$recipient->shares = $inputs['shares'];
-		$recipient->start_date = $inputs['start_date'];	
+		$start_date = $date = str_replace('/', '-', $inputs['start_date']);
+		$recipient->start_date = date('Y-m-d', strtotime($start_date));;	
 		$recipient->type = $inputs['type'];
-		$recipient->balance = $inputs['balance'];
-		$recipient->wallet_address = $inputs['wallet_address'];
+		$recipient->balance = isset($inputs['balance']) ? $inputs['balance'] : '';
+		$recipient->wallet_address = isset($inputs['wallet_address']) ? $inputs['wallet_address'] : '' ;
 
 		$recipient->save();
 	}

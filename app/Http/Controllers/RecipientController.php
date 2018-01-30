@@ -6,6 +6,9 @@ use App\Http\Requests\RecipientRequest;
 use App\Repositories\RecipientRepository;
 use Illuminate\Http\Request;
 
+use App\Recipient;
+use App\Configuration;
+
 class RecipientController extends Controller
 {
     protected $recipientRepository;
@@ -19,10 +22,23 @@ class RecipientController extends Controller
 
     public function index()
     {
-        $recipients = $this->recipientRepository->getPaginate($this->nbrPerPage);
-        $links = $recipients->render();
 
-        return view('recipient.index', compact('recipients', 'links'));
+        //Retrieve configuration
+        $configuration = Configuration::take(1)->get();
+
+        if($configuration->count() > 0)
+        {
+            $configuration = $configuration[0];
+
+            $recipients = $this->recipientRepository->getPaginate($this->nbrPerPage);
+            $links = $recipients->render();
+
+            return view('recipient.index', compact('recipients', 'links', 'configuration'));
+        }
+        else
+        {
+            return view('recipient.index')->with('error', 'Failed to connect to the API'); 
+        }         
     }
 
     public function create()
