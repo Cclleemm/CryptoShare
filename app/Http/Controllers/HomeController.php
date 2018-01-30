@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Recipient;
 use Illuminate\Http\Request;
 use App\Configuration;
-use App\Recipient;
 use App\Processor\ApiProcessor;
 
 class HomeController extends Controller

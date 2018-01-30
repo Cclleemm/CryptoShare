@@ -86,7 +86,7 @@
               <div class="small-box bg-primary">
                 <div class="inner">
                   <h3 style="font-size:1.8em">{{ count($recipients) }}</h3>
-
+                  @if(count($recipients) > 1)
                   <p><h4>Bénéficiaires</h4></p>
                   @else
                   <p><h4>Bénéficiaire</h4></p>

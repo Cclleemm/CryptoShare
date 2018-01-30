@@ -15,7 +15,7 @@ class RecipientController extends Controller
 
     public function __construct(RecipientRepository $recipientRepository)
     {
-        $this->middleware('auth')->except(['index']);
+        $this->middleware('auth')->except(['index', 'show']);
         $this->middleware('ajax', ['only' => 'store', 'update', 'edit']);
         $this->recipientRepository = $recipientRepository;
     }

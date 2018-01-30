@@ -17,7 +17,9 @@ Route::get('/', 'HomeController@index')->name('home');
 
 Route::get('update', 'UpdateController@index');
 Route::get('post', 'UpdateController@index');
+
 Route::resource('recipient', 'RecipientController');
+Route::resource('transaction', 'TransactionController');
 
 //Routes when logged in
 Route::group(['middleware' => 'auth'], function()

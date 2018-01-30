@@ -17,6 +17,7 @@ class TransactionController extends Controller
     public function __construct(TransactionRepository $transactionRepository)
     {
         $this->transactionRepository = $transactionRepository;
+        $this->middleware('auth')->except(['index']);
     }
 
     public function index()
