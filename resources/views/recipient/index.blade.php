@@ -37,48 +37,47 @@
           </div>
           @endauth
 
-          @foreach($recipients as $recipient)
-              <div class="col-md-5 col-lg-4">
-                  <div class="box box-primary">
-                      <div class="box-body box-profile">
-                          <img class="profile-user-img img-responsive img-circle"
-                               src="{{$recipient->getAvatarUrl()}}" alt="User profile picture">
+          <div class="row">
+            @foreach($recipients as $recipient)
+                <div class="col-md-5 col-lg-4">
+                    <div class="box box-primary">
+                        <div class="box-body box-profile">
+                            <img class="profile-user-img img-responsive img-circle"
+                                 src="{{$recipient->getAvatarUrl()}}" alt="User profile picture">
 
-                          <h3 class="profile-username text-center">{{$recipient->name}} 
-                            @auth
-                            {!! link_to_route('recipient.edit', 'Editer', [$recipient->id], ['class' => 'btn btn-xs btn-default btn-flat', 'type' => 'button']) !!}
-                            <button type="button" class="btn-xs btn btn-danger btn-flat delete-recipient" data-toggle="modal" data-id="{{$recipient->id}}" data-name="{{$recipient->name}}"><i class="fa fa-times"></i></button> 
-                            @endauth
-                          </h3>
+                            <h3 class="profile-username text-center">{{$recipient->name}} 
+                              @auth
+                              {!! link_to_route('recipient.edit', 'Editer', [$recipient->id], ['class' => 'btn btn-xs btn-default btn-flat modify-recipient', 'type' => 'button']) !!}
+                              <button type="button" class="btn-xs btn btn-danger btn-flat delete-recipient" data-toggle="modal" data-id="{{$recipient->id}}" data-name="{{$recipient->name}}"><i class="fa fa-times"></i></button> 
+                              @endauth
+                            </h3>
 
-                          <p class="text-muted text-center">Actionnaire à <b>{{$recipient->shares}}%</b> <br/>depuis
-                              le {{ date("d/m/Y",strtotime($recipient->start_date)) }}</p>
+                            <p class="text-muted text-center">Actionnaire à <b>{{$recipient->shares}}%</b> <br/>depuis le {{ date("d/m/Y",strtotime($recipient->start_date)) }}</p>
 
-                          <ul class="list-group list-group-unbordered">
-                              <li class="list-group-item">
-                                  <b>Type</b> <a class="pull-right">{{$recipient->type}}</a>
-                              </li>
-                              <li class="list-group-item">
-                                  <b>Wallet</b> <a class="pull-right"
-                                                   href="https://verge-blockchain.info/address/{{$recipient->wallet_address}}">{{$recipient->wallet_address}}</a>
-                              </li>
-                              <li class="list-group-item">
-                                  <b>Balance</b> <a class="pull-right">{{$recipient->balance}}</a>
-                              </li>
+                            <ul class="list-group list-group-unbordered">
+                                <li class="list-group-item">
+                                    <b>Type</b> <a class="pull-right">{{$recipient->type}}</a>
+                                </li>
+                                <li class="list-group-item">
+                                    <b>Wallet</b> <a class="pull-right" href="https://verge-blockchain.info/address/{{$recipient->wallet_address}}">{{$recipient->wallet_address}}</a>
+                                </li>
+                                <li class="list-group-item">
+                                    <b>Balance</b> <a class="pull-right">{{$recipient->balance}}</a>
+                                </li>
 
-                              <li class="list-group-item">
-                                  <b>Nombre de transactions</b> <a
-                                          class="pull-right">{{count($recipient->transactions)}}</a>
-                              </li>
+                                <li class="list-group-item">
+                                    <b>Nombre de transactions</b> <a class="pull-right">{{count($recipient->transactions)}}</a>
+                                </li>
 
-                          </ul>
+                            </ul>
 
-                          <a href="{{url('/recipient/'.$recipient->id)}}" class="btn btn-primary btn-block"><b>Voir le profil</b></a>
-                      </div>
-                      <!-- /.box-body -->
-                  </div>
-              </div>
-          @endforeach
+                            <a href="{{url('/recipient/'.$recipient->id)}}" class="btn btn-primary btn-block"><b>Voir le profil</b></a>
+                        </div>
+                        <!-- /.box-body -->
+                    </div>
+                </div>
+            @endforeach
+          </div>
 
         </section>
 
@@ -152,7 +151,7 @@
         {!! Form::close() !!}
 
         <!-- Modal Edit Recipient -->
-        {{ Form::model($recipient, ['route' => ['recipient.update', $recipient->id], 'method' => 'put']) }}
+        {{ Form::model($recipient, ['route' => ['recipient.update', ''], 'method' => 'put', 'id' => 'modifyRecipient']) }}
         <div class="modal fade" id="modal-edit-recipient">
           <div class="modal-dialog">
             <div class="modal-content">

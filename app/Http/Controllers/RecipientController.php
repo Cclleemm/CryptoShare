@@ -16,7 +16,7 @@ class RecipientController extends Controller
     public function __construct(RecipientRepository $recipientRepository)
     {
         $this->middleware('auth')->except(['index', 'show']);
-        $this->middleware('ajax', ['only' => 'store', 'update', 'edit']);
+        $this->middleware('ajax', ['only' => 'update', 'edit']);
         $this->recipientRepository = $recipientRepository;
     }
 
@@ -48,8 +48,6 @@ class RecipientController extends Controller
     {
         $recipient = $this->recipientRepository->store($request->all());
         return $recipient;
-
-        // return redirect('recipient')->withOk("Le bénéficiaire " . $recipient->name . " a été créé.");
     }
 
     public function show($id)
