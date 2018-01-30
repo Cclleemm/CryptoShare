@@ -19,7 +19,7 @@ Route::get('/', 'HomeController@index')->name('home');
 Route::group(['middleware' => 'auth'], function()
 {
 	/* Routes for Resources */
-	Route::get('recipient', 'RecipientController@index');
+	Route::resource('recipient', 'RecipientController');
 	Route::resource('configuration', 'ConfigurationController');
 
 });

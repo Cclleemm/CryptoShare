@@ -42,13 +42,13 @@
 
           <div class="row">
             <!-- left column -->
-            <div class="col-md-6">
+            <div class="col-md-8">
 
               <div class="box box-info">
                 <div class="box-header with-border">
                   <h3 class="box-title">Clé API du pool</h3>
                 </div>
-                <div class="box-body">conficon
+                <div class="box-body">
                   <div class="form-group {!! $errors->has('api_key') ? 'has-error' : '' !!}">
                     {!! Form::text('api_key', null, ['class' => 'form-control input-lg', 'placeholder' => 'Copier la clé ici']) !!}
                     {!! $errors->first('api_key', '<small class="help-block">:message</small>') !!}
@@ -66,7 +66,7 @@
                   <div class="col-sm-4">
                     <div class="form-group {!! $errors->has('number_cpus') ? 'has-error' : '' !!}">
                       <label for="number_cpus">Nombre de GPUs</label>
-                      {!! Form::number('number_cpus', null, ['class' => 'form-control input-lg', 'placeholder' => '1, 2, 3 ... ?']) !!}
+                      {!! Form::number('number_cpus', null, ['class' => 'form-control input-lg', 'placeholder' => '1, 2, 3 ... ?', 'min' => '0']) !!}
                       {!! $errors->first('number_cpus', '<small class="help-block">:message</small>') !!}
                     </div>
                   </div>
@@ -81,13 +81,13 @@
                     <div class="form-group {!! $errors->has('electricity_cost') ? 'has-error' : '' !!}">
                       <label for="electricity_cost">Coût électrique / mois</label>
                       <div class="input-group">
-                        {!! Form::number('electricity_cost', null, ['class' => 'form-control input-lg', 'placeholder' => '']) !!}
+                        {!! Form::number('electricity_cost', null, ['class' => 'form-control input-lg', 'placeholder' => '', 'min' => '0']) !!}
                         <span class="input-group-addon">{{isset($configuration) ? $configuration->fiat_currency_symbol : 'USD'}} / mois</span>
                       </div>
                       {!! $errors->first('electricity_cost', '<small class="help-block">:message</small>') !!}
                     </div>
                   </div>
-                  <div class="col-sm-12">
+                  <div class="col-sm-6">
                     <div class="form-group {!! $errors->has('crypto_currency_symbol') ? 'has-error' : '' !!}">
                       <label for="crypto_currency_symbol">Monnaie minée</label>
                       <select name="crypto_currency_symbol" class="form-control select2" style="width: 100%;">
@@ -107,7 +107,7 @@
                 <!-- /.box-body -->
               </div>
 
-              {!! Form::submit('Enregistrer', ['class' => 'btn btn-primary pull-rleft']) !!}
+              {!! Form::submit('Enregistrer', ['class' => 'btn btn-primary pull-left']) !!}
 
             </div>
           </div>

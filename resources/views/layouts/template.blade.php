@@ -27,6 +27,8 @@
 
 		<link href="{{ asset('dist/css/AdminLTE.min.css') }}" rel='stylesheet' type='text/css' />
 		<link href="{{ asset('bower_components/select2/dist/css/select2.min.css') }}" rel='stylesheet' type='text/css' />
+		<link rel="stylesheet" href="{{ asset('bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css') }}">
+		<link rel="stylesheet" href="{{ asset('bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css') }}">
 		
 		<!--[if lte IE 8]><script src="js/admin/ie/html5shiv.js"></script><![endif]-->
 		<!--[if lte IE 8]><link href="css/admin/ie8.css" rel='stylesheet' type='text/css' /><![endif]-->
