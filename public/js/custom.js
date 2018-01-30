@@ -1,19 +1,33 @@
 // View Recipient, automatic change of form on select change
-$('select[name=type]').change(function (){
+$('#modifyRecipient select[name=type]').on('change', function (){
 
-	var wallet_type = $('select[name=type]').val();
+	var wallet_type = $('#modifyRecipient select[name=type]').val();
 
 	if(wallet_type == "Fiat"){
-		$('#wallet_address').css('display', 'none');
-		$('#balance').css('display', 'block');
+		$('#modifyRecipient .wallet_address').css('display', 'none');
+		$('#modifyRecipient .balance').css('display', 'block');
 	}
 	else
 	{
-		$('#wallet_address').css('display', 'block');
-		$('#balance').css('display', 'none');	
+		$('#modifyRecipient .wallet_address').css('display', 'block');
+		$('#modifyRecipient .balance').css('display', 'none');	
 	}
 });
 
+$('#addRecipient select[name=type]').on('change', function (){
+
+	var wallet_type = $('#addRecipient select[name=type]').val();
+
+	if(wallet_type == "Fiat"){
+		$('#addRecipient .wallet_address').css('display', 'none');
+		$('#addRecipient .balance').css('display', 'block');
+	}
+	else
+	{
+		$('#addRecipient .wallet_address').css('display', 'block');
+		$('#addRecipient .balance').css('display', 'none');	
+	}
+});
 
 $(document).on('submit', '#addRecipient', function(e) {  
     e.preventDefault();
@@ -57,12 +71,12 @@ $(document).on('submit', '#modifyRecipient', function(e) {
     .done(function(data) {
 
     	location.reload();
-        $('#modal-add-recipient').modal('hide');
+        $('#modal-modify-recipient').modal('hide');
     })
     .fail(function(data) {
     	var data = data.responseJSON;
         $.each(data.errors, function (key, value) {
-            var input = '#addRecipient input[name=' + key + ']';
+            var input = '#modifyRecipient input[name=' + key + ']';
             $(input + '+small').text(value);
             $(input).parent().addClass('has-error');
         });
@@ -70,16 +84,21 @@ $(document).on('submit', '#modifyRecipient', function(e) {
 });
 
 $('.modify-recipient').on('click', function(e) {  
-	
-    var recipientId = $(this).data('id');
-    var recipientName = $(this).data('name');
 
-    $("#modal-delete-recipient #recipientName").html( recipientName );
-    $("#deleteRecipient").attr('action', function(i, val){
-    	return val +"/"+recipientId;
+	var recipientId = $(this).data('id');
+
+    $('#modifyRecipient input[name=name]').val($(this).data('name'));
+    $('#modifyRecipient input[name=wallet_address]').val($(this).data('wallet'));
+    $('#modifyRecipient input[name=type]').val($(this).data('type'));
+    $('#modifyRecipient input[name=balance]').val($(this).data('balance'));
+    $('#modifyRecipient input[name=shares]').val($(this).data('shares'));
+    $('#modifyRecipient input[name=start_date]').val($(this).data('start'));
+
+    $("#modifyRecipient").attr('action', function(i, val){
+    	return "/recipient/"+recipientId;
     })
 
-    $('#modal-delete-recipient').modal('show');
+    $('#modal-modify-recipient').modal('show');
 });
 
 
@@ -90,7 +109,7 @@ $('.delete-recipient').on('click', function(e) {
 
     $("#modal-delete-recipient #recipientName").html( recipientName );
     $("#deleteRecipient").attr('action', function(i, val){
-    	return val +"/"+recipientId;
+    	return "/recipient/"+recipientId;
     })
 
     $('#modal-delete-recipient').modal('show');

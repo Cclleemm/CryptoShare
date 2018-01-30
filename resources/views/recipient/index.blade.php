@@ -47,7 +47,7 @@
 
                             <h3 class="profile-username text-center">{{$recipient->name}} 
                               @auth
-                              {!! link_to_route('recipient.edit', 'Editer', [$recipient->id], ['class' => 'btn btn-xs btn-default btn-flat modify-recipient', 'type' => 'button']) !!}
+                              <button type="button" class="btn-xs btn btn-default btn-flat modify-recipient" data-toggle="modal" data-id="{{$recipient->id}}" data-name="{{$recipient->name}}" data-type="{{$recipient->type}}" data-wallet="{{$recipient->wallet_address}}" data-shares="{{$recipient->shares}}" data-balance="{{$recipient->balance}}" data-start="{{$recipient->start_date}}" ><i class="fa fa-pencil"></i> Editer</button> 
                               <button type="button" class="btn-xs btn btn-danger btn-flat delete-recipient" data-toggle="modal" data-id="{{$recipient->id}}" data-name="{{$recipient->name}}"><i class="fa fa-times"></i></button> 
                               @endauth
                             </h3>
@@ -59,7 +59,7 @@
                                     <b>Type</b> <a class="pull-right">{{$recipient->type}}</a>
                                 </li>
                                 <li class="list-group-item">
-                                    <b>Wallet</b> <a class="pull-right" href="https://verge-blockchain.info/address/{{$recipient->wallet_address}}">{{$recipient->wallet_address}}</a>
+                                    <b>Wallet</b> <a class="pull-right" target="_blank" href="https://verge-blockchain.info/address/{{$recipient->wallet_address}}">{{$recipient->wallet_address}}</a>
                                 </li>
                                 <li class="list-group-item">
                                     <b>Balance</b> <a class="pull-right">{{$recipient->balance}}</a>
@@ -104,13 +104,13 @@
                       <small class="help-block"></small>
                     </div>
                     
-                    <div id="wallet_address" class="form-group">
+                    <div class="wallet_address form-group">
                       <label for="wallet_address">Adresse du wallet</label>
                       {!! Form::text('wallet_address', null, ['class' => 'form-control', 'placeholder' => 'Adresse du wallet']) !!}
                       <small class="help-block"></small>
                     </div>
 
-                    <div id="balance" style="display:none" class="form-group">
+                    <div class="balance form-group" style="display:none">
                       <label for="balance">Balance</label>
                       <div class="input-group">
                         <div class="input-group-addon">
@@ -152,7 +152,7 @@
 
         <!-- Modal Edit Recipient -->
         {{ Form::model($recipient, ['route' => ['recipient.update', ''], 'method' => 'put', 'id' => 'modifyRecipient']) }}
-        <div class="modal fade" id="modal-edit-recipient">
+        <div class="modal fade" id="modal-modify-recipient">
           <div class="modal-dialog">
             <div class="modal-content">
               <div class="modal-header">
@@ -161,27 +161,25 @@
                 <h4 class="modal-title">Editer un bénéficiaire</h4>
               </div>
               <div class="modal-body">
-                    <div class="form-group {!! $errors->has('name') ? 'has-error' : '' !!}">
+                    <div class="form-group">
                       <label for="type">Nom du bénéficiaire</label>
                       {!! Form::text('name', null, ['class' => 'form-control', 'placeholder' => 'Nom']) !!}
-                      {!! $errors->first('name', '<small class="help-block">:message</small>') !!}
+                      <small class="help-block"></small>
                     </div>
 
-                      <div class="form-group {!! $errors->has('type') ? 'has-error' : '' !!}">
+                      <div class="form-group">
                           <label for="type">Type de Wallet</label>
                           {!! Form::select('type', array('Crypto' => 'Crypto Wallet', 'Fiat' => 'Fiat Wallet'), 'Crypto', ['class' => 'form-control']) !!}
-                          {!! $errors->first('type', '<small class="help-block">:message</small>') !!}
+                          <small class="help-block"></small>
                       </div>
 
-                      <div id="wallet_address"
-                           class="form-group {!! $errors->has('wallet_address') ? 'has-error' : '' !!}">
+                      <div class="wallet_address form-group">
                           <label for="wallet_address">Adresse du wallet</label>
                           {!! Form::text('wallet_address', null, ['class' => 'form-control', 'placeholder' => 'Adresse du wallet']) !!}
-                          {!! $errors->first('wallet_address', '<small class="help-block">:message</small>') !!}
+                          <small class="help-block"></small>
                       </div>
 
-                      <div id="balance" style="display:none"
-                           class="form-group {!! $errors->has('balance') ? 'has-error' : '' !!}">
+                      <div style="display:none" class="balance form-group">
                           <label for="balance">Balance</label>
                           <div class="input-group">
                               <div class="input-group-addon">
@@ -190,13 +188,13 @@
                               {!! Form::number('balance', 0, ['class' => 'form-control', 'placeholder' => 'Exemple : 150', 'min' => '0']) !!}
                           </div>
 
-                          {!! $errors->first('balance', '<small class="help-block">:message</small>') !!}
+                          <small class="help-block"></small>
                       </div>
 
-                      <div class="form-group {!! $errors->has('shares') ? 'has-error' : '' !!}">
+                      <div class="form-group">
                           <label for="shares">Part (%)</label>
                           {!! Form::number('shares', null, ['class' => 'form-control', 'placeholder' => '69', 'min' => '0', 'max' => '100', 'step' => 'any']) !!}
-                          {!! $errors->first('shares', '<small class="help-block">:message</small>') !!}
+                          <small class="help-block"></small>
                       </div>
 
                       <div class="form-group">
