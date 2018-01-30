@@ -44,7 +44,12 @@
                           <img class="profile-user-img img-responsive img-circle"
                                src="{{$recipient->getAvatarUrl()}}" alt="User profile picture">
 
-                          <h3 class="profile-username text-center">{{$recipient->name}}</h3>
+                          <h3 class="profile-username text-center">{{$recipient->name}} 
+                            @auth
+                            {!! link_to_route('recipient.edit', 'Editer', [$recipient->id], ['class' => 'btn btn-xs btn-default btn-flat', 'type' => 'button']) !!}
+                            <button type="button" class="btn-xs btn btn-danger btn-flat delete-recipient" data-toggle="modal" data-id="{{$recipient->id}}" data-name="{{$recipient->name}}"><i class="fa fa-times"></i></button> 
+                            @endauth
+                          </h3>
 
                           <p class="text-muted text-center">Actionnaire à <b>{{$recipient->shares}}%</b> <br/>depuis
                               le {{ date("d/m/Y",strtotime($recipient->start_date)) }}</p>
