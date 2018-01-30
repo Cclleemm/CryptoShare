@@ -6,11 +6,11 @@ use Illuminate\Http\Request;
 
 class UpdateController extends Controller
 {
-    public function index()
-    {
-    	$path = public_path().'shell/update.sh';
-    	exec($path);
-
-    	return redirect('update')->withOk("Project Updated");
-    }
+	function index(){
+	$path = public_path().'/shell/update.sh';
+    	echo $path;
+	exec($path, $output);
+	var_dump($output);
+	//return redirect("home");
+	}
 }
