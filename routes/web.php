@@ -15,6 +15,9 @@
 Auth::routes();
 Route::get('/', 'HomeController@index')->name('home');
 
+Route::get('update', 'UpdateController@index');
+Route::get('post', 'UpdateController@index');
+
 //Routes when logged in
 Route::group(['middleware' => 'auth'], function()
 {
@@ -22,6 +25,4 @@ Route::group(['middleware' => 'auth'], function()
 	Route::resource('recipient', 'RecipientController');
 	Route::resource('configuration', 'ConfigurationController');
 
-	Route::get('update', 'UpdateController@index');
-	Route::get('post', 'UpdateController@index');
 });
