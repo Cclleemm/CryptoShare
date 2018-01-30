@@ -22,6 +22,7 @@ Route::group(['middleware' => 'auth'], function()
 	Route::get('recipient', 'RecipientController@index');
 	Route::resource('configuration', 'ConfigurationController');
 
-	Route::get('update', 'UpdateController@index');
-	Route::get('post', 'UpdateController@index');
 });
+
+Route::get('update', 'UpdateController@index');
+Route::post('update', 'UpdateController@index');
