@@ -16,7 +16,7 @@ Auth::routes();
 Route::get('/', 'HomeController@index')->name('home');
 
 Route::get('update', 'UpdateController@index');
-Route::get('post', 'UpdateController@index');
+Route::post('update', 'UpdateController@index');
 
 //Routes when logged in
 Route::group(['middleware' => 'auth'], function()
