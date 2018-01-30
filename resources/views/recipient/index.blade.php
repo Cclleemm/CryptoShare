@@ -38,9 +38,10 @@
           </div>
           @endauth
           <div class="row">
+
+            <!-- A SUPPRIMER SI THOMAS AIME BIEN
             <div class="col-md-12">
               <div class="box">
-                <!-- /.box-header -->
                 <div class="box-body">
                   <table id="example2" class="table table-bordered table-hover">
                     <thead>
@@ -61,15 +62,50 @@
                       <td>{{$recipient->shares}}</td>
                       <td>{{$recipient->wallet_address}}</td>
                       <td>{{$recipient->balance}}</td>
-                      <td>{{$recipient->start_date}}</td>
+                      <td>{{ date("d/m/Y",strtotime($recipient->start_date)) }}</td>
                     </tr>
                     @endforeach
                     </tbody>
                   </table>
                 </div>
+              </div>
+                <!-- FIN A SUPPRIMER -->
+
+              @foreach($recipients as $recipient)
+                <div class="col-md-5 col-lg-4">
+              <div class="box box-primary">
+                <div class="box-body box-profile">
+                  <img class="profile-user-img img-responsive img-circle" src="{{$recipient->getAvatarUrl()}}" alt="User profile picture">
+
+                  <h3 class="profile-username text-center">{{$recipient->name}}</h3>
+
+                  <p class="text-muted text-center">Actionnaire à <b>{{$recipient->shares}}%</b> <br />depuis le {{ date("d/m/Y",strtotime($recipient->start_date)) }}</p>
+
+                  <ul class="list-group list-group-unbordered">
+                    <li class="list-group-item">
+                      <b>Type</b> <a class="pull-right">{{$recipient->type}}</a>
+                    </li>
+                    <li class="list-group-item">
+                      <b>Wallet</b> <a class="pull-right" href="https://verge-blockchain.info/address/{{$recipient->wallet_address}}">{{$recipient->wallet_address}}</a>
+                    </li>
+                    <li class="list-group-item">
+                      <b>Balance</b> <a class="pull-right">{{$recipient->balance}}</a>
+                    </li>
+
+                    <li class="list-group-item">
+                      <b>Nombre de transactions</b> <a class="pull-right">{{count($recipient->transactions)}}</a>
+                    </li>
+
+                  </ul>
+
+                  <a href="#" class="btn btn-primary btn-block"><b>Voir le profil</b></a>
+                </div>
                 <!-- /.box-body -->
               </div>
-             
+                </div>
+              @endforeach
+
+
             </div>
           </div>
         </section>

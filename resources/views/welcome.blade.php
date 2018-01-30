@@ -81,7 +81,7 @@
               <!-- small box -->
               <div class="small-box bg-primary">
                 <div class="inner">
-                  <h3 style="font-size:1.8em">5</h3>
+                  <h3 style="font-size:1.8em">{{ count($recipients) }}</h3>
 
                   <p><h4>Bénéficiaires</h4></p>
                 </div>
