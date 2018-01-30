@@ -9,11 +9,15 @@
       <div class="content-wrapper">
 
         @if(isset($error))
-        <div class="callout callout-danger">
-          <h4>Clé API manquante ou erronné !</h4>
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="callout callout-danger">
+              <h4>Clé API manquante ou erronné !</h4>
 
-          <p>Veuillez <a href="{{ url('/configuration') }}">renseigner une clé API valide</a> correspondant à votre compte sur le pool pour le bon fonctionnement de cette plateforme.</p>
-        </div> 
+              <p>Veuillez <a href="{{ url('/configuration') }}">renseigner une clé API valide</a> correspondant à votre compte sur le pool pour le bon fonctionnement de cette plateforme.</p>
+            </div> 
+          </div>
+        </div>
         @else
         <!-- Content Header (Page header) -->
         <section class="content-header">
@@ -81,9 +85,12 @@
               <!-- small box -->
               <div class="small-box bg-primary">
                 <div class="inner">
-                  <h3 style="font-size:1.8em">5</h3>
-
+                  <h3 style="font-size:1.8em">{{$number_recipients}}</h3>
+                  @if($number_recipients > 1)
                   <p><h4>Bénéficiaires</h4></p>
+                  @else
+                  <p><h4>Bénéficiaire</h4></p>
+                  @endif
                 </div>
                 <div class="icon">
                   <i class="fa fa-user"></i>

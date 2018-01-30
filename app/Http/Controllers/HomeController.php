@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Configuration;
+use App\Recipient;
 use App\Processor\ApiProcessor;
 
 class HomeController extends Controller
@@ -28,6 +29,9 @@ class HomeController extends Controller
         //Retrieve configuration
         $configuration = Configuration::take(1)->get();
 
+        //Retrieve recipient
+        $recipients = Recipient::all();
+
         if($configuration->count() > 0)
         {
             $configuration = $configuration[0];
@@ -42,6 +46,7 @@ class HomeController extends Controller
                 $coin_price = number_format($coinmarketcapData['coin_price'], 3);
                 $balance_fiat = number_format(($poolData['confirmed']+$poolData['unconfirmed'])*$coinmarketcapData['coin_price'], 0);
                 $coin_change = number_format($coinmarketcapData['coin_change'], 2);
+                $number_recipients = $recipients->count();
 
                 $infos = array('hashrate' => $hashrate, 
                                 'balance' => $balance, 
@@ -49,7 +54,8 @@ class HomeController extends Controller
                                 'coin_price' => $coin_price, 
                                 'coin_change' => $coin_change, 
                                 'currency' => $configuration->fiat_currency_symbol, 
-                                'coin_symbol' => $configuration->crypto_currency_symbol
+                                'coin_symbol' => $configuration->crypto_currency_symbol,
+                                'number_recipients' => $number_recipients
                                 );
                 
                 return view('welcome')->with($infos);            

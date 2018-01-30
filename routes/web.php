@@ -17,12 +17,12 @@ Route::get('/', 'HomeController@index')->name('home');
 
 Route::get('update', 'UpdateController@index');
 Route::get('post', 'UpdateController@index');
+Route::resource('recipient', 'RecipientController');
 
 //Routes when logged in
 Route::group(['middleware' => 'auth'], function()
 {
 	/* Routes for Resources */
-	Route::resource('recipient', 'RecipientController');
 	Route::resource('configuration', 'ConfigurationController');
 
 });

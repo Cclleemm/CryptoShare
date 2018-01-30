@@ -27,8 +27,8 @@ class RecipientRequest extends FormRequest
             'name' => 'required|max:255',
             'thumbnail' => 'image|max:500|dimensions:max_width=300',
             'type' => 'required|max:255',
-            'shares' => 'required|numeric|between:0,99.99',
-            'balance' => 'numeric',
+            'shares' => 'required|numeric|between:0,100',
+            'balance' => 'numeric|min:0',
             'start_date' => 'required|date',
             'wallet_address' => 'max:250',
         ];

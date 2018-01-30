@@ -27,11 +27,6 @@ class RecipientRepository
 		$recipient->save();
 	}
 
-	public function getPaginate($n)
-	{
-		return $this->recipient->paginate($n);
-	}
-
 	public function store(Array $inputs)
 	{
 		$recipient = new $this->recipient;		

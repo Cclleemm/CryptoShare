@@ -13,16 +13,15 @@ class RecipientController extends Controller
 {
     protected $recipientRepository;
 
-    protected $nbrPerPage = 50;
-
     public function __construct(RecipientRepository $recipientRepository)
     {
+        $this->middleware('auth')->except(['index']);
+        $this->middleware('ajax', ['only' => 'store', 'update', 'edit']);
         $this->recipientRepository = $recipientRepository;
     }
 
     public function index()
     {
-
         //Retrieve configuration
         $configuration = Configuration::take(1)->get();
 
@@ -30,10 +29,9 @@ class RecipientController extends Controller
         {
             $configuration = $configuration[0];
 
-            $recipients = $this->recipientRepository->getPaginate($this->nbrPerPage);
-            $links = $recipients->render();
+            $recipients = Recipient::all();
 
-            return view('recipient.index', compact('recipients', 'links', 'configuration'));
+            return view('recipient.index', compact('recipients', 'configuration'));
         }
         else
         {
@@ -49,8 +47,9 @@ class RecipientController extends Controller
     public function store(RecipientRequest $request)
     {
         $recipient = $this->recipientRepository->store($request->all());
+        return $recipient;
 
-        return redirect('recipient')->withOk("Le bénéficiaire " . $recipient->name . " a été créé.");
+        // return redirect('recipient')->withOk("Le bénéficiaire " . $recipient->name . " a été créé.");
     }
 
     public function show($id)
@@ -64,14 +63,15 @@ class RecipientController extends Controller
     {
         $recipient = $this->recipientRepository->getById($id);
 
-        return view('edit',  compact('recipient'));
+        return $recipient;
     }
 
     public function update(RecipientRequest $request, $id)
     {
-        $this->recipientRepository->update($id, $request->all());
+        $recipient = $this->recipientRepository->update($id, $request->all());
+        return $recipient;
         
-        return redirect('recipient')->withOk("Le bénéficiaire " . $request->input('name') . " a été modifié.");
+        // return redirect('recipient')->withOk("Le bénéficiaire " . $request->input('name') . " a été modifié.");
     }
 
     public function destroy($id)

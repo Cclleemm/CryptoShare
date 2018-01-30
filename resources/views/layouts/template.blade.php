@@ -117,8 +117,8 @@
 	                </span>
 	              </a>
 	              <ul class="treeview-menu">
-	                <li class="{{ Route::currentRouteNamed('recipient.index') ? 'active' : '' }}"><a href=""><i class="fa fa-users"></i> Liste des bénéficiaires</a></li>
-	                <li class="{{ Route::currentRouteNamed('transaction.index') ? 'active' : '' }}"><a href=""><i class="fa fa-exchange"></i> Historique des transactions</a></li>
+	                <li class="{{ Route::currentRouteNamed('recipient.index') ? 'active' : '' }}"><a href="{{ url('/recipient') }}"><i class="fa fa-users"></i> Liste des bénéficiaires</a></li>
+	                <li class="{{ Route::currentRouteNamed('transaction.index') ? 'active' : '' }}"><a href="{{ url('/transaction') }}"><i class="fa fa-exchange"></i> Historique des transactions</a></li>
 	              </ul>
 	            </li>
 	            @else
