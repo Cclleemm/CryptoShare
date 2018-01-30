@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Recipient;
 use Illuminate\Http\Request;
 use App\Configuration;
 use App\Recipient;
@@ -46,7 +47,7 @@ class HomeController extends Controller
                 $coin_price = number_format($coinmarketcapData['coin_price'], 3);
                 $balance_fiat = number_format(($poolData['confirmed']+$poolData['unconfirmed'])*$coinmarketcapData['coin_price'], 0);
                 $coin_change = number_format($coinmarketcapData['coin_change'], 2);
-                $number_recipients = $recipients->count();
+                $recipients = Recipient::all();
 
                 $infos = array('hashrate' => $hashrate, 
                                 'balance' => $balance, 
@@ -55,7 +56,7 @@ class HomeController extends Controller
                                 'coin_change' => $coin_change, 
                                 'currency' => $configuration->fiat_currency_symbol, 
                                 'coin_symbol' => $configuration->crypto_currency_symbol,
-                                'number_recipients' => $number_recipients
+                                'recipients' => $recipients
                                 );
                 
                 return view('welcome')->with($infos);            
