@@ -34,7 +34,7 @@
                 <div class="row" style="margin-bottom:30px">
                     <div class="col-sm-3">
                         <button type="button" class="btn btn-success btn-flat" data-toggle="modal"
-                                data-target="#modal-add-recipient">Ajouter une transaction
+                                data-target="#modal-add-transaction">Ajouter une transaction
                         </button>
                     </div>
                 </div>
@@ -44,7 +44,7 @@
                     <div class="box">
                         <!-- /.box-header -->
                         <div class="box-body">
-                            <table id="example2" class="table table-bordered table-hover">
+                            <table id="transaction-table" class="table table-bordered table-hover">
                                 <thead>
                                 <tr>
                                     <th>Date</th>
@@ -77,7 +77,7 @@
     </div>
     <!-- /.content-wrapper -->
     {!! Form::open(['route' => 'transaction.store']) !!}
-    <div class="modal fade" id="modal-add-recipient">
+    <div class="modal fade" id="modal-add-transaction">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -129,23 +129,13 @@
 
 @section('extra-script')
 
-    {{ Html::script('bower_components/select2/dist/js/select2.full.min.js') }}
-    {{ Html::script('bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js') }}
-    {{ Html::script('js/custom.js') }}
     {{ Html::script('bower_components/datatables.net/js/jquery.dataTables.min.js') }}
     {{ Html::script('bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js') }}
 
     <script>
         $(function () {
-            //Initialize Select2 Elements
-            $('.select2').select2();
 
-            //Date picker
-            $('#datepicker').datepicker({
-                autoclose: true
-            })
-
-            $('#example2').DataTable({
+            $('#transaction-table').DataTable({
                 'paging': true,
                 'lengthChange': false,
                 'searching': false,
@@ -154,12 +144,9 @@
                 'autoWidth': false
             })
 
-            // var wallet_type = $('select[name=type]').val();
-            // if(wallet_type == "Fiat"){
-            //   $('#wallet_address').css('visibility', 'hidden');
-            // }
         });
 
     </script>
+
 
 @endsection

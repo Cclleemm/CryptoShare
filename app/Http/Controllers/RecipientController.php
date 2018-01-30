@@ -55,9 +55,20 @@ class RecipientController extends Controller
 
     public function show($id)
     {
+        $configuration = Configuration::take(1)->get();
+
+        if($configuration->count() > 0)
+        {
+        $configuration = $configuration[0];
+
         $recipient = $this->recipientRepository->getById($id);
 
-        return view('show',  compact('recipient'));
+        return view('recipient.show',  compact('recipient', 'configuration'));
+        }
+        else
+        {
+            return view('recipient.index')->with('error', 'Failed to connect to the API');
+        }
     }
 
     public function edit($id)
