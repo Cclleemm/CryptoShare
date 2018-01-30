@@ -13,7 +13,7 @@ class RecipientController extends Controller
 {
     protected $recipientRepository;
 
-    protected $nbrPerPage = 4;
+    protected $nbrPerPage = 50;
 
     public function __construct(RecipientRepository $recipientRepository)
     {
