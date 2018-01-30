@@ -23,6 +23,7 @@ Route::group(['middleware' => 'auth'], function()
 {
 	/* Routes for Resources */
 	Route::resource('recipient', 'RecipientController');
+    Route::resource('transaction', 'TransactionController');
 	Route::resource('configuration', 'ConfigurationController');
 
 });
