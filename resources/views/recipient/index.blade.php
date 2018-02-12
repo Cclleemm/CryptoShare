@@ -83,7 +83,7 @@
                                     </h5>
                                 </div>
                                 <div class="col-md-4">
-                                    <h5>{{$recipient->transactionsCryptoSum()}} {{$configuration->fiat_currency_symbol}}<br>
+                                    <h5>{{$recipient->transactionsFiatSum()}} {{$configuration->fiat_currency_symbol}}<br>
                                         <small>Gagné</small>
                                     </h5>
                                 </div>
