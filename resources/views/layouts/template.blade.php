@@ -1,178 +1,197 @@
 <!DOCTYPE html>
-<html lang="en" class="no-js">
+<html lang="en">
+
 <head>
     <title>@yield('page-title')</title>
     <meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <meta name="description" content="Smart Financial Dashboard for Genius Geeky Miners"/>
     <meta name="author" content="SavoyCorporation"/>
     <link rel="shortcut icon" href="{{ asset('img/favicon.png') }}">
-
-    <!-- Bootstrap 3.3.7 -->
-    <link rel="stylesheet" href="{{ asset('bower_components/bootstrap/dist/css/bootstrap.min.css') }}">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no'
+          name='viewport'/>
+    <!--     Fonts and icons     -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css"/>
+    <!-- CSS Files -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet"/>
     <!-- Font Awesome -->
     <link rel="stylesheet" href="{{ asset('bower_components/font-awesome/css/font-awesome.min.css') }}">
     <!-- Ionicons -->
     <link rel="stylesheet" href="{{ asset('bower_components/Ionicons/css/ionicons.min.css') }}">
     <!-- jvectormap -->
     <link rel="stylesheet" href="{{ asset('bower_components/jvectormap/jquery-jvectormap.css') }}">
-    <!-- Theme style -->
-    <link href="{{ asset('dist/css/AdminLTE.min.css') }}" rel='stylesheet' type='text/css'/>
-    <!-- AdminLTE Skins. Choose a skin from the css/skins
-       folder instead of downloading all of them to reduce the load. -->
-    <link href="{{ asset('dist/css/skins/_all-skins.min.css') }}" rel='stylesheet' type='text/css'/>
+    <link href="/css/light-bootstrap-dashboard.css?v=2.0.1" rel="stylesheet"/>
 
-    <!-- Google Font -->
-    <link rel="stylesheet"
-          href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
-
-    <link href="{{ asset('dist/css/AdminLTE.min.css') }}" rel='stylesheet' type='text/css'/>
     <link href="{{ asset('bower_components/select2/dist/css/select2.min.css') }}" rel='stylesheet' type='text/css'/>
+
     <link rel="stylesheet"
           href="{{ asset('bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css') }}">
 
-    <!--[if lte IE 8]>
-    <script src="js/admin/ie/html5shiv.js"></script><![endif]-->
-    <!--[if lte IE 8]>
-    <link href="css/admin/ie8.css" rel='stylesheet' type='text/css'/><![endif]-->
-    <!--[if lte IE 9]>
-    <link href="css/admin/ie9.css" rel='stylesheet' type='text/css'/><![endif]-->
-
+    <link href="/css/app.css" rel="stylesheet"/>
 </head>
 
+<body>
+<div class="wrapper">
+    <div class="sidebar" data-image="/img/sidebar-1.jpg" data-color="orange">
+        <!--
+    Tip 1: You can change the color of the sidebar using: data-color="purple | blue | green | orange | red"
 
-<body class="hold-transition skin-black sidebar-mini">
-
-	<div class="wrapper">
-
-	    <header class="main-header">
-
-	        <!-- Logo -->
-	        <a href="{{url('/')}}" class="logo">
-	            <!-- mini logo for sidebar mini 50x50 pixels -->
-	            <span class="logo-mini"><b>C</b>Cs</span>
-	            <!-- logo for regular state and mobile devices -->
-	            <span class="logo-lg"><b>Crypto</b>Charts</span>
-	        </a>
-
-	        <!-- Header Navbar: style can be found in header.less -->
-	        <nav class="navbar navbar-static-top">
-	            <!-- Sidebar toggle button-->
-	            <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
-	                <span class="sr-only">Toggle navigation</span>
-	            </a>
-	            <!-- Navbar Right Menu -->
-	            <div class="navbar-custom-menu">
-	                <ul class="nav navbar-nav">
-	                    @guest
-	                        <li><a href="{{ route('login') }}">Login</a></li>
-	                        @else
-	                            <li class="dropdown">
-	                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-	                                   aria-expanded="false" aria-haspopup="true">
-	                                    {{ Auth::user()->name }} <span class="caret"></span>
-	                                </a>
-
-	                                <ul class="dropdown-menu">
-	                                    <li>
-	                                        <a href="{{ route('logout') }}"
-	                                           onclick="event.preventDefault();
-		                                         document.getElementById('logout-form').submit();">
-	                                            Logout
-	                                        </a>
-
-	                                        <form id="logout-form" action="{{ route('logout') }}" method="POST"
-	                                              style="display: none;">
-	                                            {{ csrf_field() }}
-	                                        </form>
-	                                    </li>
-	                                </ul>
-	                            </li>
-	                            @endguest
-	                </ul>
-	            </div>
-
-	        </nav>
-	    </header>
-	    <!-- Left side column. contains the logo and sidebar -->
-	    <aside class="main-sidebar">
-	        <!-- sidebar: style can be found in sidebar.less -->
-	        <section class="sidebar">
-	            <!-- Sidebar user panel -->
-	            <div class="user-panel">
-	                <div class="pull-left image">
-	                    <img src="img/verge.jpg" class="img-circle" alt="verge Image">
-	                </div>
-	                <div class="pull-left info">
-	                    <p>Verge Mining Rig</p>
-	                    <a href="#"><i class="fa fa-home"></i> Saint Alban Leysse</a>
-	                    <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
-	                </div>
-	            </div>
-	            <!-- /.search form -->
-	            <!-- sidebar menu: : style can be found in sidebar.less -->
-	            <ul class="sidebar-menu" data-widget="tree">
-	                <li class="header">MENU</li>
-	                <li class="{{ Route::currentRouteNamed('home') ? 'active' : '' }}"><a href="{{url('/')}}"><i
-	                                class="fa fa-dashboard"></i> <span>Statistiques</span></a></li>
-	                <li class="{{ Route::currentRouteNamed('recipient.index') ? 'active' : '' }}"><a
-	                            href="{{url('/recipient')}}"><i class="fa fa-users"></i> <span>Bénéficiaires</span></a>
-	                </li>
-	                <li class="{{ Route::currentRouteNamed('transaction.index') ? 'active' : '' }}"><a
-	                            href="{{url('/transaction')}}"><i class="fa fa-exchange"></i> <span>Transactions</span></a>
-	                </li>
-
-	                @guest
-	                    @else
-	                        <li class="{{ Route::currentRouteNamed('configuration.index') ? 'active' : '' }}"><a
-	                                    href="{{ url('/configuration') }}"><i class="fa fa-gear"></i>
-	                                <span>Configuration</span></a></li>
-	                        @endguest
-	            </ul>
-	        </section>
-	        <!-- /.sidebar -->
-	    </aside>
+    Tip 2: you can also add an image using data-image tag
+-->
+        <div class="sidebar-wrapper">
+            <div class="logo">
+                <a href="/" class="simple-text">
+                    CryptoShare
+                </a>
+            </div>
+            <ul class="nav">
+                <li class="nav-item {{ Route::currentRouteNamed('home') ? 'active' : '' }}">
+                    <a class="nav-link" href="{{url('/')}}">
+                        <i class="nc-icon nc-chart-pie-35"></i>
+                        <p>Dashboard</p>
+                    </a>
+                </li>
+                <li>
+                    <a class="nav-link {{ Route::currentRouteNamed('recipient.index') ? 'active' : '' }}"
+                       href="{{url('/recipient')}}">
+                        <i class="nc-icon nc-circle-09"></i>
+                        <p>Bénéficiaires</p>
+                    </a>
+                </li>
+                <li>
+                    <a class="nav-link {{ Route::currentRouteNamed('transaction.index') ? 'active' : '' }}"
+                       href="{{url('/transaction')}}">
+                        <i class="nc-icon nc-notes"></i>
+                        <p>Transactions</p>
+                    </a>
+                </li>
 
 
-	    @yield('content')
-	    
-	    <footer class="main-footer">
-	        <div class="pull-right hidden-xs">
-	            <b>Version</b> 0.0.1
-	        </div>
-	        <strong>Copyright &copy; {{date('Y')}} SavoyCorporation.</strong> All rights
-	        reserved.
-	    </footer>
+                @guest
+                    @else
+                        <li>
+                            <a class="nav-link {{ Route::currentRouteNamed('configuration.index') ? 'active' : '' }}"
+                               href="{{ url('/configuration') }}">
+                                <i class="nc-icon nc-atom"></i>
+                                <p>Configuration</p>
+                            </a>
+                        </li>
+                        @endguest
 
-	</div>
+
+            </ul>
+        </div>
+    </div>
+    <div class="main-panel">
+        <!-- Navbar -->
+        <nav class="navbar navbar-expand-lg " color-on-scroll="500">
+            <div class=" container-fluid  ">
+                <a class="navbar-brand" href="#pablo"> Dashboard </a>
+                <button href="" class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+                        aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-bar burger-lines"></span>
+                    <span class="navbar-toggler-bar burger-lines"></span>
+                    <span class="navbar-toggler-bar burger-lines"></span>
+                </button>
+                <div class="collapse navbar-collapse justify-content-end" id="navigation">
+                    <ul class="nav navbar-nav mr-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-toggle="dropdown">
+                                <i class="nc-icon nc-palette"></i>
+                                <span class="d-lg-none">Dashboard</span>
+                            </a>
+                        </li>
+                        <li class="dropdown nav-item">
+                            <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
+                                <i class="nc-icon nc-planet"></i>
+                                <span class="notification">5</span>
+                                <span class="d-lg-none">Notification</span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <a class="dropdown-item" href="#">Notification 1</a>
+                                <a class="dropdown-item" href="#">Notification 2</a>
+                                <a class="dropdown-item" href="#">Notification 3</a>
+                                <a class="dropdown-item" href="#">Notification 4</a>
+                                <a class="dropdown-item" href="#">Another notification</a>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="nc-icon nc-zoom-split"></i>
+                                <span class="d-lg-block">&nbsp;Search</span>
+                            </a>
+                        </li>
+                    </ul>
+                    <ul class="navbar-nav ml-auto">
+
+                        @guest
+                            <li><a href="{{ route('login') }}">Login</a></li>
+                            @else
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="http://example.com"
+                                       id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
+                                       aria-expanded="false">
+                                        <span class="no-icon">{{ Auth::user()->name }} </span>
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                        <a class="dropdown-item" href="{{ url('/configuration') }}">Configuration</a>
+                                        <div class="divider"></div>
+                                        <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
+		                                         document.getElementById('logout-form').submit();">Déconnexion</a>
+                                    </div>
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                          style="display: none;">
+                                        {{ csrf_field() }}
+                                    </form>
+                                </li>
+                        @endguest
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <!-- End Navbar -->
+        <div class="content">
+            <div class="container-fluid">
+                @yield('content')
+            </div>
+        </div>
+        <footer class="footer">
+            <div class="container">
+                <nav>
+                    <ul class="footer-menu">
+                        <li>
+                            <a href="#">Home</a>
+                        </li>
+                        <li>
+                            <a href="#">Company</a>
+                        </li>
+                        <li>
+                            <a href="#">Portfolio</a>
+                        </li>
+                        <li>
+                            <a href="#">Blog</a>
+                        </li>
+                    </ul>
+                    <p class="copyright text-center">
+                        <a href="http://www.creative-tim.com">Creative Tim</a> design
+                    </p>
+                </nav>
+            </div>
+        </footer>
+    </div>
+</div>
 </body>
-
-
-<!--Script -->
 <!-- jQuery 3 -->
 {{ Html::script('bower_components/jquery/dist/jquery.min.js') }}
-<!-- Bootstrap 3.3.7 -->
-{{ Html::script('bower_components/bootstrap/dist/js/bootstrap.min.js') }}
-<!-- FastClick -->
-{{ Html::script('bower_components/fastclick/lib/fastclick.js') }}
-<!-- AdminLTE App -->
-{{ Html::script('dist/js/adminlte.min.js') }}
-<!-- Sparkline -->
-{{ Html::script('bower_components/jquery-sparkline/dist/jquery.sparkline.min.js') }}
-<!-- jvectormap  -->
-{{ Html::script('plugins/jvectormap/jquery-jvectormap-1.2.2.min.js') }}
-{{ Html::script('plugins/jvectormap/jquery-jvectormap-world-mill-en.js') }}
-<!-- SlimScroll -->
-{{ Html::script('bower_components/jquery-slimscroll/jquery.slimscroll.min.js') }}
-<!-- ChartJS -->
-{{ Html::script('bower_components/Chart.js/Chart.js') }}
-<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-{{ Html::script('dist/js/pages/dashboard2.js') }}
-<!-- AdminLTE for demo purposes -->
-{{ Html::script('dist/js/demo.js') }}
-	
-	<!--[if lte IE 8]>{{ Html::script('js/admin/ie/respond.min.js') }}<![endif]-->
+
+<script src="/js/core/popper.min.js" type="text/javascript"></script>
+<script src="/js/core/bootstrap.min.js" type="text/javascript"></script>
+<!--  Chartist Plugin  -->
+<script src="/js/plugins/chartist.min.js"></script>
+<!--  Notifications Plugin    -->
+<script src="/js/plugins/bootstrap-notify.js"></script>
+<!-- Control Center for Light Bootstrap Dashboard: scripts for the example pages etc -->
+<script src="/js/light-bootstrap-dashboard.js?v=2.0.1" type="text/javascript"></script>
 
 @yield('extra-script')
 

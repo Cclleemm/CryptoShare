@@ -5,241 +5,311 @@
 @endsection
 
 @section('content')
-       <!-- Content Wrapper. Contains page content -->
-      <div class="content-wrapper">
+    <!-- Content Wrapper. Contains page content -->
 
-        @if(isset($error))
+    @if(isset($error))
         <div class="row">
-          <div class="col-sm-6">
-            <div class="callout callout-danger">
-              <h4>Clé API manquante ou erronné !</h4>
+            <div class="alert alert-warning col-sm-12">
+                <h4>Clé API manquante ou erronné !</h4>
 
-              <p>Veuillez <a href="{{ url('/configuration') }}">renseigner une clé API valide</a> correspondant à votre compte sur le pool pour le bon fonctionnement de cette plateforme.</p>
-            </div> 
-          </div>
+                Veuillez renseigner une clé API validecorrespondant à
+                votre compte sur le pool pour le bon fonctionnement de cette plateforme.
+                <br/><br/>
+                <a href="{{ url('/configuration') }}" class="btn btn-primary">Configurer ma clé API</a>
+
+            </div>
+
         </div>
-        @else
-        <!-- Content Header (Page header) -->
-        <section class="content-header">
-          <h1>
-            Statistiques
-            <small>MAJ le 25/01/2018 à 13:45:45</small>
-          </h1>
-        </section>
 
-        <!-- Main content -->
-        <section class="content">
+    @else
 
-          <!-- Small boxes (Stat box) -->
-          <div class="row">
-            <div class="col-lg-3 col-xs-6">
-              <!-- small box -->
-              <div class="small-box bg-primary">
-                <div class="inner">
-                  <h3 style="font-size:1.8em">{{$coin_symbol}} - {{$coin_price}} {{$currency}} </h3>
-                  <p><h4>
-                    @if ($coin_change < 0)
-                    <i class="fa fa-arrow-down text-danger"></i><strong class="text-danger">{{$coin_change}} </strong> dernière 24h</h4></p>
-                    @else
-                    <i class="fa fa-arrow-up text-success"></i><strong class="text-success">{{$coin_change}} </strong> dernière 24h</h4></p>
-                    @endif
 
-                </div>
-                <div class="icon">
-                  {{$coin_symbol}}
-                </div>
-                <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
-              </div>
-            </div>
-            <!-- ./col -->
-            <div class="col-lg-3 col-xs-6">
-              <!-- small box -->
-              <div class="small-box bg-primary">
-                <div class="inner">
-                  <h3 style="font-size:1.8em">{{$hashrate}} <sup style="font-size: 20px">MH/s</sup></h3>
-
-                  <p><h4>Hashrate</h4></p>
-                </div>
-                <div class="icon">
-                  <i class="ion ion-stats-bars"></i>
-                </div>
-                <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
-              </div>
-            </div>
-            <div class="col-lg-3 col-xs-6">
-              <!-- small box -->
-              <div class="small-box bg-primary">
-                <div class="inner">
-                  <h3 style="font-size:1.8em">{{$balance}} ({{$balance_fiat}} {{$currency}})</h3>
-
-                  <p><h4>{{$coin_symbol}} minés ce mois</h4></p>
-                </div>
-                <div class="icon">
-                  <i class="fa fa-dollar"></i>
-                </div>
-                <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
-              </div>
-            </div>
-            <!-- ./col -->
-            <div class="col-lg-3 col-xs-6">
-              <!-- small box -->
-              <div class="small-box bg-primary">
-                <div class="inner">
-                  <h3 style="font-size:1.8em">{{ count($recipients) }}</h3>
-                  @if(count($recipients) > 1)
-                  <p><h4>Bénéficiaires</h4></p>
-                  @else
-                  <p><h4>Bénéficiaire</h4></p>
-                  @endif
-                </div>
-                <div class="icon">
-                  <i class="fa fa-user"></i>
-                </div>
-                <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
-              </div>
-            </div>
-            <!-- ./col -->
-
-            <!-- ./col -->
-          </div>
-
-          <div class="row">
-            <div class="col-md-12">
-              <div class="box">
-                <div class="box-header with-border">
-                  <h3 class="box-title">Monthly Recap Report</h3>
-
-                  <div class="box-tools pull-right">
-                    <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                    </button>
-                    <div class="btn-group">
-                      <button type="button" class="btn btn-box-tool dropdown-toggle" data-toggle="dropdown">
-                        <i class="fa fa-wrench"></i></button>
-                      <ul class="dropdown-menu" role="menu">
-                        <li><a href="#">Action</a></li>
-                        <li><a href="#">Another action</a></li>
-                        <li><a href="#">Something else here</a></li>
-                        <li class="divider"></li>
-                        <li><a href="#">Separated link</a></li>
-                      </ul>
-                    </div>
-                    <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-                  </div>
-                </div>
-                <!-- /.box-header -->
-                <div class="box-body">
-                  <div class="row">
-                    <div class="col-md-8">
-                      <p class="text-center">
-                        <strong>Sales: 1 Jan, 2014 - 30 Jul, 2014</strong>
-                      </p>
-
-                      <div class="chart">
-                        <!-- Sales Chart Canvas -->
-                        <canvas id="salesChart" style="height: 180px;"></canvas>
-                      </div>
-                      <!-- /.chart-responsive -->
-                    </div>
-                    <!-- /.col -->
-                    <div class="col-md-4">
-                      <p class="text-center">
-                        <strong>Goal Completion</strong>
-                      </p>
-
-                      <div class="progress-group">
-                        <span class="progress-text">Add Products to Cart</span>
-                        <span class="progress-number"><b>160</b>/200</span>
-
-                        <div class="progress sm">
-                          <div class="progress-bar progress-bar-aqua" style="width: 80%"></div>
+        <div class="row">
+            <div class="col-lg-3 col-sm-6">
+                <div class="card">
+                    <div class="content">
+                        <div class="row">
+                            <div class="col-5">
+                                <div class="icon-big  {{ ($coin_change < 0) ? 'text-danger' : 'text-success' }} text-center">
+                                    <i class="nc-icon nc-chart-bar-32"></i>
+                                </div>
+                            </div>
+                            <div class="col-7">
+                                <div class="numbers">
+                                    <p>Cours du {{$coin_symbol}}</p>
+                                    {{$coin_price}}
+                                    <small> {{$currency}}</small>
+                                </div>
+                            </div>
                         </div>
-                      </div>
-                      <!-- /.progress-group -->
-                      <div class="progress-group">
-                        <span class="progress-text">Complete Purchase</span>
-                        <span class="progress-number"><b>310</b>/400</span>
-
-                        <div class="progress sm">
-                          <div class="progress-bar progress-bar-red" style="width: 80%"></div>
+                        <div class="footer">
+                            <hr>
+                            <div class="stats">
+                                <i class="nc-icon {{ ($coin_change < 0) ? 'nc-stre-down' : 'nc-stre-up' }}"></i>
+                                <b>{{$coin_change}}%</b> depuis les dernières 24h
+                            </div>
                         </div>
-                      </div>
-                      <!-- /.progress-group -->
-                      <div class="progress-group">
-                        <span class="progress-text">Visit Premium Page</span>
-                        <span class="progress-number"><b>480</b>/800</span>
-
-                        <div class="progress sm">
-                          <div class="progress-bar progress-bar-green" style="width: 80%"></div>
-                        </div>
-                      </div>
-                      <!-- /.progress-group -->
-                      <div class="progress-group">
-                        <span class="progress-text">Send Inquiries</span>
-                        <span class="progress-number"><b>250</b>/500</span>
-
-                        <div class="progress sm">
-                          <div class="progress-bar progress-bar-yellow" style="width: 80%"></div>
-                        </div>
-                      </div>
-                      <!-- /.progress-group -->
                     </div>
-                    <!-- /.col -->
-                  </div>
-                  <!-- /.row -->
                 </div>
-                <!-- ./box-body -->
-                <div class="box-footer">
-                  <div class="row">
-                    <div class="col-sm-3 col-xs-6">
-                      <div class="description-block border-right">
-                        <span class="description-percentage text-green"><i class="fa fa-caret-up"></i> 17%</span>
-                        <h5 class="description-header">$35,210.43</h5>
-                        <span class="description-text">TOTAL REVENUE</span>
-                      </div>
-                      <!-- /.description-block -->
-                    </div>
-                    <!-- /.col -->
-                    <div class="col-sm-3 col-xs-6">
-                      <div class="description-block border-right">
-                        <span class="description-percentage text-yellow"><i class="fa fa-caret-left"></i> 0%</span>
-                        <h5 class="description-header">$10,390.90</h5>
-                        <span class="description-text">TOTAL COST</span>
-                      </div>
-                      <!-- /.description-block -->
-                    </div>
-                    <!-- /.col -->
-                    <div class="col-sm-3 col-xs-6">
-                      <div class="description-block border-right">
-                        <span class="description-percentage text-green"><i class="fa fa-caret-up"></i> 20%</span>
-                        <h5 class="description-header">$24,813.53</h5>
-                        <span class="description-text">TOTAL PROFIT</span>
-                      </div>
-                      <!-- /.description-block -->
-                    </div>
-                    <!-- /.col -->
-                    <div class="col-sm-3 col-xs-6">
-                      <div class="description-block">
-                        <span class="description-percentage text-red"><i class="fa fa-caret-down"></i> 18%</span>
-                        <h5 class="description-header">1200</h5>
-                        <span class="description-text">GOAL COMPLETIONS</span>
-                      </div>
-                      <!-- /.description-block -->
-                    </div>
-                  </div>
-                  <!-- /.row -->
-                </div>
-                <!-- /.box-footer -->
-              </div>
-              <!-- /.box -->
             </div>
-            <!-- /.col -->
-          </div>
-          <!-- /.row -->
+            <div class="col-lg-3 col-sm-6">
+                <div class="card">
+                    <div class="content">
+                        <div class="row">
+                            <div class="col-5">
+                                <div class="icon-big text-primary text-center">
+                                    <i class="nc-icon nc-spaceship"></i>
+                                </div>
+                            </div>
+                            <div class="col-7">
+                                <div class="numbers">
+                                    <p>Vitesse de minage</p>
+                                    {{$hashrate}}
+                                    <small> MH/s</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="footer">
+                            <hr>
+                            <div class="stats">
+                                <i class="nc-icon nc-refresh-02"></i> Vitesse estimée il y a 1 minute
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-sm-6">
+                <div class="card">
+                    <div class="content">
+                        <div class="row">
+                            <div class="col-5">
+                                <div class="icon-big text-warning text-center">
+                                    <i class="nc-icon nc-money-coins"></i>
+                                </div>
+                            </div>
+                            <div class="col-7">
+                                <div class="numbers">
+                                    <p>Gains du pool</p>
+                                    {{$balance}}
+                                    <small>{{$coin_symbol}}</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="footer">
+                            <hr>
+                            <div class="stats">
+                                <i class="nc-icon nc-bulb-63"></i> <b>{{$balance_fiat}}
+                                    <small>{{$currency}}</small>
+                                </b> au cours actuel
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-sm-6">
+                <a href="{{url('/recipient')}}">
+                    <div class="card">
+                        <div class="content">
+                            <div class="row">
+                                <div class="col-5">
+                                    <div class="icon-big text-info text-center">
+                                        <i class="nc-icon nc-circle-09"></i>
+                                    </div>
+                                </div>
+                                <div class="col-7">
+                                    <div class="numbers">
+                                        <p>Bénéficaires</p>
+                                        {{ count($recipients) }}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="footer">
+                                <hr>
+                                <div class="stats">
+                                    <i class="nc-icon nc-stre-right"></i> Afficher les bénéficaires
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
 
-        </section>
-        @endif
-        <!-- /.content -->
-      </div>
-      <!-- /.content-wrapper -->
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card ">
+                    <div class="card-header ">
+                        <h4 class="card-title">Gains par bénéficiaires</h4>
+                        <p class="card-category">Répartition des gains par bénéficiaires</p>
+                    </div>
+                    <div class="card-body ">
+                        <div id="chartPreferences" class="ct-chart ct-perfect-fourth">
+                            <svg xmlns:ct="http://gionkunz.github.com/chartist-js/ct" width="100%" height="100%"
+                                 class="ct-chart-pie" style="width: 100%; height: 100%;">
+                                <g class="ct-series ct-series-c">
+                                    <path d="M200.5,5A117.5,117.5,0,0,0,125.287,32.227L200.5,122.5Z"
+                                          class="ct-slice-pie" value="11"></path>
+                                </g>
+                                <g class="ct-series ct-series-b">
+                                    <path d="M125.603,31.965A117.5,117.5,0,0,0,178.886,237.995L200.5,122.5Z"
+                                          class="ct-slice-pie" value="36"></path>
+                                </g>
+                                <g class="ct-series ct-series-a">
+                                    <path d="M178.483,237.919A117.5,117.5,0,1,0,200.5,5L200.5,122.5Z"
+                                          class="ct-slice-pie" value="53"></path>
+                                </g>
+                                <g>
+                                    <text dx="258.98926542043097" dy="128.02886340746272" text-anchor="middle"
+                                          class="ct-label">53%
+                                    </text>
+                                    <text dx="143.59573928369292" dy="137.1105308709352" text-anchor="middle"
+                                          class="ct-label">36%
+                                    </text>
+                                    <text dx="180.5991471855891" dy="67.22325482393927" text-anchor="middle"
+                                          class="ct-label">11%
+                                    </text>
+                                </g>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="card-footer ">
+                        <div class="legend">
+                            <i class="fa fa-circle text-info"></i> Open
+                            <i class="fa fa-circle text-danger"></i> Bounce
+                            <i class="fa fa-circle text-warning"></i> Unsubscribe
+                        </div>
+                        <hr>
+                        <div class="stats">
+                            <i class="fa fa-clock-o"></i> Campaign sent 2 days ago
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-md-8">
+                <div class="card ">
+                    <div class="card-header ">
+                        <h4 class="card-title">Gains du RIG</h4>
+                        <p class="card-category">Gains depuis la création du RIG</p>
+                    </div>
+                    <div class="card-body ">
+                        <div id="chartHours" class="ct-chart">
+                            <svg xmlns:ct="http://gionkunz.github.com/chartist-js/ct" width="100%" height="245px"
+                                 class="ct-chart-line" style="width: 100%; height: 245px;">
+                                <g class="ct-grids">
+                                    <line y1="210" y2="210" x1="50" x2="850" class="ct-grid ct-vertical"></line>
+                                    <line y1="185.625" y2="185.625" x1="50" x2="850" class="ct-grid ct-vertical"></line>
+                                    <line y1="161.25" y2="161.25" x1="50" x2="850" class="ct-grid ct-vertical"></line>
+                                    <line y1="136.875" y2="136.875" x1="50" x2="850" class="ct-grid ct-vertical"></line>
+                                    <line y1="112.5" y2="112.5" x1="50" x2="850" class="ct-grid ct-vertical"></line>
+                                    <line y1="88.125" y2="88.125" x1="50" x2="850" class="ct-grid ct-vertical"></line>
+                                    <line y1="63.75" y2="63.75" x1="50" x2="850" class="ct-grid ct-vertical"></line>
+                                    <line y1="39.375" y2="39.375" x1="50" x2="850" class="ct-grid ct-vertical"></line>
+                                    <line y1="15" y2="15" x1="50" x2="850" class="ct-grid ct-vertical"></line>
+                                </g>
+                                <g>
+                                    <g class="ct-series ct-series-a">
+                                        <path d="M50,210L50,140.044C83.333,140.044,116.667,116.156,150,116.156C183.333,116.156,216.667,90.563,250,90.563C283.333,90.563,316.667,90.075,350,90.075C383.333,90.075,416.667,74.963,450,74.963C483.333,74.963,516.667,67.163,550,67.163C583.333,67.163,616.667,39.863,650,39.863C683.333,39.863,716.667,40.594,750,40.594C783.333,40.594,816.667,26.7,850,26.7C883.333,26.7,916.667,17.925,950,17.925C983.333,17.925,1016.667,3.787,1050,3.787C1083.333,3.787,1116.667,-20.1,1150,-20.1L1150,210Z"
+                                              class="ct-area"
+                                              values="[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object]"></path>
+                                    </g>
+                                    <g class="ct-series ct-series-b">
+                                        <path d="M50,210L50,193.669C83.333,193.669,116.667,172.95,150,172.95C183.333,172.95,216.667,175.144,250,175.144C283.333,175.144,316.667,151.5,350,151.5C383.333,151.5,416.667,140.044,450,140.044C483.333,140.044,516.667,128.344,550,128.344C583.333,128.344,616.667,103.969,650,103.969C683.333,103.969,716.667,103.481,750,103.481C783.333,103.481,816.667,78.619,850,78.619C883.333,78.619,916.667,77.887,950,77.887C983.333,77.887,1016.667,77.4,1050,77.4C1083.333,77.4,1116.667,52.294,1150,52.294L1150,210Z"
+                                              class="ct-area"
+                                              values="[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object]"></path>
+                                    </g>
+                                    <g class="ct-series ct-series-c">
+                                        <path d="M50,210L50,204.394C83.333,204.394,116.667,182.456,150,182.456C183.333,182.456,216.667,193.669,250,193.669C283.333,193.669,316.667,183.675,350,183.675C383.333,183.675,416.667,163.688,450,163.688C483.333,163.688,516.667,151.744,550,151.744C583.333,151.744,616.667,135.169,650,135.169C683.333,135.169,716.667,134.925,750,134.925C783.333,134.925,816.667,102.994,850,102.994C883.333,102.994,916.667,110.063,950,110.063C983.333,110.063,1016.667,110.063,1050,110.063C1083.333,110.063,1116.667,85.931,1150,85.931L1150,210Z"
+                                              class="ct-area"
+                                              values="[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object]"></path>
+                                    </g>
+                                </g>
+                                <g class="ct-labels">
+                                    <foreignObject style="overflow: visible;" x="50" y="215" width="100" height="20">
+                                        <span class="ct-label ct-horizontal ct-end" style="width: 100px; height: 20px"
+                                              xmlns="http://www.w3.org/1999/xhtml">9:00AM</span></foreignObject>
+                                    <foreignObject style="overflow: visible;" x="150" y="215" width="100" height="20">
+                                        <span class="ct-label ct-horizontal ct-end" style="width: 100px; height: 20px"
+                                              xmlns="http://www.w3.org/1999/xhtml">12:00AM</span></foreignObject>
+                                    <foreignObject style="overflow: visible;" x="250" y="215" width="100" height="20">
+                                        <span class="ct-label ct-horizontal ct-end" style="width: 100px; height: 20px"
+                                              xmlns="http://www.w3.org/1999/xhtml">3:00PM</span></foreignObject>
+                                    <foreignObject style="overflow: visible;" x="350" y="215" width="100" height="20">
+                                        <span class="ct-label ct-horizontal ct-end" style="width: 100px; height: 20px"
+                                              xmlns="http://www.w3.org/1999/xhtml">6:00PM</span></foreignObject>
+                                    <foreignObject style="overflow: visible;" x="450" y="215" width="100" height="20">
+                                        <span class="ct-label ct-horizontal ct-end" style="width: 100px; height: 20px"
+                                              xmlns="http://www.w3.org/1999/xhtml">9:00PM</span></foreignObject>
+                                    <foreignObject style="overflow: visible;" x="550" y="215" width="100" height="20">
+                                        <span class="ct-label ct-horizontal ct-end" style="width: 100px; height: 20px"
+                                              xmlns="http://www.w3.org/1999/xhtml">12:00PM</span></foreignObject>
+                                    <foreignObject style="overflow: visible;" x="650" y="215" width="100" height="20">
+                                        <span class="ct-label ct-horizontal ct-end" style="width: 100px; height: 20px"
+                                              xmlns="http://www.w3.org/1999/xhtml">3:00AM</span></foreignObject>
+                                    <foreignObject style="overflow: visible;" x="750" y="215" width="100" height="20">
+                                        <span class="ct-label ct-horizontal ct-end" style="width: 100px; height: 20px"
+                                              xmlns="http://www.w3.org/1999/xhtml">6:00AM</span></foreignObject>
+                                    <foreignObject style="overflow: visible;" y="185.625" x="10" height="24.375"
+                                                   width="30"><span class="ct-label ct-vertical ct-start"
+                                                                    style="height: 24px; width: 30px"
+                                                                    xmlns="http://www.w3.org/1999/xhtml">0</span>
+                                    </foreignObject>
+                                    <foreignObject style="overflow: visible;" y="161.25" x="10" height="24.375"
+                                                   width="30"><span class="ct-label ct-vertical ct-start"
+                                                                    style="height: 24px; width: 30px"
+                                                                    xmlns="http://www.w3.org/1999/xhtml">100</span>
+                                    </foreignObject>
+                                    <foreignObject style="overflow: visible;" y="136.875" x="10" height="24.375"
+                                                   width="30"><span class="ct-label ct-vertical ct-start"
+                                                                    style="height: 24px; width: 30px"
+                                                                    xmlns="http://www.w3.org/1999/xhtml">200</span>
+                                    </foreignObject>
+                                    <foreignObject style="overflow: visible;" y="112.5" x="10" height="24.375"
+                                                   width="30"><span class="ct-label ct-vertical ct-start"
+                                                                    style="height: 24px; width: 30px"
+                                                                    xmlns="http://www.w3.org/1999/xhtml">300</span>
+                                    </foreignObject>
+                                    <foreignObject style="overflow: visible;" y="88.125" x="10" height="24.375"
+                                                   width="30"><span class="ct-label ct-vertical ct-start"
+                                                                    style="height: 24px; width: 30px"
+                                                                    xmlns="http://www.w3.org/1999/xhtml">400</span>
+                                    </foreignObject>
+                                    <foreignObject style="overflow: visible;" y="63.75" x="10" height="24.375"
+                                                   width="30"><span class="ct-label ct-vertical ct-start"
+                                                                    style="height: 24px; width: 30px"
+                                                                    xmlns="http://www.w3.org/1999/xhtml">500</span>
+                                    </foreignObject>
+                                    <foreignObject style="overflow: visible;" y="39.375" x="10" height="24.375"
+                                                   width="30"><span class="ct-label ct-vertical ct-start"
+                                                                    style="height: 24px; width: 30px"
+                                                                    xmlns="http://www.w3.org/1999/xhtml">600</span>
+                                    </foreignObject>
+                                    <foreignObject style="overflow: visible;" y="15" x="10" height="24.375" width="30">
+                                        <span class="ct-label ct-vertical ct-start" style="height: 24px; width: 30px"
+                                              xmlns="http://www.w3.org/1999/xhtml">700</span></foreignObject>
+                                    <foreignObject style="overflow: visible;" y="-15" x="10" height="30" width="30">
+                                        <span class="ct-label ct-vertical ct-start" style="height: 30px; width: 30px"
+                                              xmlns="http://www.w3.org/1999/xhtml">800</span></foreignObject>
+                                </g>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="card-footer ">
+                        <div class="legend">
+                            <i class="fa fa-circle text-info"></i> Open
+                            <i class="fa fa-circle text-danger"></i> Click
+                            <i class="fa fa-circle text-warning"></i> Click Second Time
+                        </div>
+                        <hr>
+                        <div class="stats">
+                            <i class="fa fa-history"></i> Updated 3 minutes ago
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    @endif
 
 @endsection

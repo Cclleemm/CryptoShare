@@ -10,15 +10,15 @@
     <div class="content-wrapper">
 
         <section class="content-header">
-            <h1>
-                {{$recipient->name}}
-                <small>Profil de {{$recipient->name}}</small>
-            </h1>
             <ol class="breadcrumb">
                 <li><a href="{{url('/')}}"><i class="fa fa-dashboard"></i> Accueil</a></li>
                 <li><a href="{{url('/recipient')}}">Bénéficiaires</a></li>
                 <li class="active">{{$recipient->name}}</li>
             </ol>
+            <h2>
+                {{$recipient->name}}
+                <small>Détails du bénéficiaire</small>
+            </h2>
         </section>
 
         <!-- Main content -->
@@ -30,41 +30,40 @@
                 </div>
             @endif
 
-            <h2>Mes transactions</h2>
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="box">
-                            <!-- /.box-header -->
-                            <div class="box-body">
-                                <table id="transaction-table" class="table table-bordered table-hover">
-                                    <thead>
-                                    <tr>
-                                        <th>Date</th>
-                                        <th>Note</th>
-                                        <th>Bénificaire</th>
-                                        <th>Montant en {{$configuration->crypto_currency_name}}</th>
-                                        <th>Montant fiat</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    @foreach($recipient->transactions as $transaction)
-                                        <tr>
-                                            <td>{{ date("d/m/Y H:i",strtotime($transaction->created_at)) }}</td>
-                                            <td>{{$transaction->note}}</td>
-                                            <td>{{$transaction->recipient->name}}</td>
-                                            <td class="text-success">+ {{$transaction->crypto_amount_transfered}}  {{$configuration->crypto_currency_symbol}}</td>
-                                            <td class="text-success">+ {{$transaction->fiat_amount_transfered}}  {{$configuration->fiat_currency_symbol}}</td>
-                                        </tr>
-                                    @endforeach
-                                    </tbody>
-                                </table>
-                            </div>
-                            <!-- /.box-body -->
-                        </div>
 
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card strpied-tabled-with-hover">
+                        <div class="card-header ">
+                            <h4 class="card-title">Mes transactions</h4>
+                        </div>
+                        <div class="card-body table-full-width table-responsive">
+                            <table class="table table-hover table-striped">
+                                <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Note</th>
+                                    <th>Bénificaire</th>
+                                    <th>Montant en {{$configuration->crypto_currency_name}}</th>
+                                    <th>Montant fiat</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                @foreach($recipient->transactions as $transaction)
+                                    <tr>
+                                        <td>{{ date("d/m/Y H:i",strtotime($transaction->created_at)) }}</td>
+                                        <td>{{$transaction->note}}</td>
+                                        <td>{{$transaction->recipient->name}}</td>
+                                        <td class="text-success">+ {{$transaction->crypto_amount_transfered}}  {{$configuration->crypto_currency_symbol}}</td>
+                                        <td class="text-success">+ {{$transaction->fiat_amount_transfered}}  {{$configuration->fiat_currency_symbol}}</td>
+                                    </tr>
+                                @endforeach
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
-
+            </div>
 
         </section>
 
