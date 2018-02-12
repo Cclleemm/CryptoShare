@@ -55,6 +55,7 @@ class HomeController extends Controller
                                 'coin_change' => $coin_change, 
                                 'currency' => $configuration->fiat_currency_symbol, 
                                 'coin_symbol' => $configuration->crypto_currency_symbol,
+                                'coin_name' => $configuration->crypto_currency_name,
                                 'recipients' => $recipients
                                 );
                 

@@ -64,7 +64,7 @@
                             <div class="col-7">
                                 <div class="numbers">
                                     <p>Vitesse de minage</p>
-                                    {{$hashrate}}
+                                    {{round($hashrate)}}
                                     <small> MH/s</small>
                                 </div>
                             </div>
@@ -144,43 +144,17 @@
                     </div>
                     <div class="card-body ">
                         <div id="chartPreferences" class="ct-chart ct-perfect-fourth">
-                            <svg xmlns:ct="http://gionkunz.github.com/chartist-js/ct" width="100%" height="100%"
-                                 class="ct-chart-pie" style="width: 100%; height: 100%;">
-                                <g class="ct-series ct-series-c">
-                                    <path d="M200.5,5A117.5,117.5,0,0,0,125.287,32.227L200.5,122.5Z"
-                                          class="ct-slice-pie" value="11"></path>
-                                </g>
-                                <g class="ct-series ct-series-b">
-                                    <path d="M125.603,31.965A117.5,117.5,0,0,0,178.886,237.995L200.5,122.5Z"
-                                          class="ct-slice-pie" value="36"></path>
-                                </g>
-                                <g class="ct-series ct-series-a">
-                                    <path d="M178.483,237.919A117.5,117.5,0,1,0,200.5,5L200.5,122.5Z"
-                                          class="ct-slice-pie" value="53"></path>
-                                </g>
-                                <g>
-                                    <text dx="258.98926542043097" dy="128.02886340746272" text-anchor="middle"
-                                          class="ct-label">53%
-                                    </text>
-                                    <text dx="143.59573928369292" dy="137.1105308709352" text-anchor="middle"
-                                          class="ct-label">36%
-                                    </text>
-                                    <text dx="180.5991471855891" dy="67.22325482393927" text-anchor="middle"
-                                          class="ct-label">11%
-                                    </text>
-                                </g>
-                            </svg>
+
+                            <div class="ct-chart ct-golden-section" id="chart1"></div>
+
+
+
                         </div>
                     </div>
                     <div class="card-footer ">
-                        <div class="legend">
-                            <i class="fa fa-circle text-info"></i> Open
-                            <i class="fa fa-circle text-danger"></i> Bounce
-                            <i class="fa fa-circle text-warning"></i> Unsubscribe
-                        </div>
                         <hr>
                         <div class="stats">
-                            <i class="fa fa-clock-o"></i> Campaign sent 2 days ago
+                            <i class="nc-icon nc-bulb-63"></i> Basé sur le {{$coin_name}}
                         </div>
                     </div>
                 </div>
@@ -190,7 +164,7 @@
             <div class="col-md-8">
                 <div class="card ">
                     <div class="card-header ">
-                        <h4 class="card-title">Gains du RIG</h4>
+                        <h4 class="card-title">Gains du RIG (Comming soon)</h4>
                         <p class="card-category">Gains depuis la création du RIG</p>
                     </div>
                     <div class="card-body ">
@@ -312,4 +286,51 @@
 
     @endif
 
+@endsection
+
+@section('extra-script')
+<script>
+    // Initialize a Line chart in the container with the ID chart1
+
+
+    var data = {
+        labels: [
+            @foreach($recipients as $recipient)
+            '{{strtok($recipient->name, " ")}}',
+            @endforeach
+        ],
+        series: [
+            @foreach($recipients as $key=>$recipient)
+                {{$recipient->transactionsSum()}},
+            @endforeach
+        ]
+    };
+
+    var options = {
+        labelInterpolationFnc: function(value) {
+            return value[0]
+        }
+    };
+
+    var responsiveOptions = [
+        ['screen and (min-width: 640px)', {
+            chartPadding: 30,
+            labelOffset: 100,
+            labelDirection: 'explode',
+            labelInterpolationFnc: function(value) {
+                return value;
+            }
+        }],
+        ['screen and (min-width: 1024px)', {
+            labelOffset: 80,
+            chartPadding: 20
+        }]
+    ];
+
+
+
+
+    new Chartist.Pie('#chart1', data, options, responsiveOptions);
+
+</script>
 @endsection
