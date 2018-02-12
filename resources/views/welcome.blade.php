@@ -301,7 +301,7 @@
         ],
         series: [
             @foreach($recipients as $key=>$recipient)
-                {{$recipient->transactionsSum()}},
+                {{$recipient->transactionsCryptoSum()}},
             @endforeach
         ]
     };
