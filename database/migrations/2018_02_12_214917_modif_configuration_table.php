@@ -14,7 +14,7 @@ class ModifConfigurationTable extends Migration
     public function up()
     {
         Schema::table('configurations', function (Blueprint $table) {
-            $table->string('blockchain_explorer_url');
+            $table->string('blockchain_explorer_url')->nullable();
         });
     }
 

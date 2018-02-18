@@ -14,18 +14,8 @@ class ModifTransactionTable extends Migration
     public function up()
     {
         Schema::table('transactions', function (Blueprint $table) {
-            $table->integer('origin_id')->unsigned();
-            $table->integer('destination_id')->unsigned();
-            $table->foreign('origin_id')
-                  ->references('id')
-                  ->on('recipients')
-                  ->onDelete('restrict')
-                  ->onUpdate('cascade');
-            $table->foreign('destination_id')
-                  ->references('id')
-                  ->on('recipients')
-                  ->onDelete('restrict')
-                  ->onUpdate('cascade');
+            $table->string('origin')->nullable()->default(NULL);
+            $table->string('destination')->nullable()->default(NULL);
         });
     }
 

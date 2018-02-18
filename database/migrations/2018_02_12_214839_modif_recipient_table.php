@@ -14,7 +14,7 @@ class ModifRecipientTable extends Migration
     public function up()
     {
         Schema::table('recipients', function (Blueprint $table) {
-            $table->string('email')->unique();
+            $table->string('email');
         });
     }
 
