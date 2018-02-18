@@ -841,6 +841,7 @@ button.close {
 
 .breadcrumb{
     float:right;
+    margin-bottom:0px;
 }
 .breadcrumb li{
     display: inline;
