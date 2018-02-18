@@ -6,11 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Recipient extends Model
 {
-    protected $fillable = ['name', 'thumbnail', 'shares', 'start_date', 'type', 'balance', 'wallet_address'];
+    protected $fillable = ['name', 'thumbnail', 'shares', 'start_date', 'type', 'balance', 'wallet_address', 'email'];
 
     public function getAvatarUrl()
     {
-        return "https://www.gravatar.com/avatar/" . md5("clement@raussin.com") . "?d=mm&s=100";
+        return "https://www.gravatar.com/avatar/" . md5($this->email) . "?d=retro&s=100";
     }
 
     public function transactions()

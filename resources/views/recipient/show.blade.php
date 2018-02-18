@@ -35,20 +35,7 @@
                 <div class="col-md-4">
                     <div class="card card-user">
                         <div class="card-image">
-                            @auth
-                                <button type="button" style="position: absolute; top:8px; left:10px;"
-                                        class="btn btn-xs btn btn-primary btn-flat modify-recipient btn-fill" data-toggle="modal"
-                                        data-id="{{$recipient->id}}" data-name="{{$recipient->name}}"
-                                        data-type="{{$recipient->type}}"
-                                        data-wallet="{{$recipient->wallet_address}}"
-                                        data-shares="{{$recipient->shares}}" data-balance="{{$recipient->balance}}"
-                                        data-start="{{$recipient->start_date}}"><i class="fa fa-pencil"></i> Editer
-                                </button>
-                                <button type="button" style="position: absolute; top:8px; right:10px;"
-                                        class="btn btn-xs btn btn-danger btn-flat delete-recipient btn-fill" data-toggle="modal"
-                                        data-id="{{$recipient->id}}" data-name="{{$recipient->name}}"><i
-                                            class="fa fa-times"></i></button>
-                            @endauth
+
                             <img src="{{ asset('img/bg-'.($recipient->id%6).'.png') }}"
                                  alt="...">
                         </div>
